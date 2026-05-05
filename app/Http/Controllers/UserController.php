@@ -13,6 +13,6 @@ class UserController extends Controller {
         $usuario = User::find(1); 
 
         // Carga la vista user/profile de la carpeta de views
-        return view('user.profile', ['user' => $usuario]);
+        return view('profile', ['user' => $usuario]);
     }
 }
