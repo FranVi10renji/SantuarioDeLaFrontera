@@ -1,0 +1,12 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+Route::get('/', function () { return view('welcome'); });
+
+
+
+// Para usar un metodo de una clase hay que añadirlo primero:
+use App\Http\Controllers\UserController;
+
+// El primer parametro es la ruta a la que se accede y luego la clase y el metodo de la clase al que accedemos
+Route::get('/perfil', [UserController::class, 'show']);
