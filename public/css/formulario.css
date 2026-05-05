@@ -1,0 +1,426 @@
+/* CONFIG INCIAL */
+
+:root {
+    --azul: #0A2E36;
+    --verde: #82D382;
+    --rosa: #C687E3;
+    --neutro: #D9D9D9;
+    --neutro_oscuro: #222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E9C2FB;
+}
+
+/* HEADER */
+
+header {
+    background-color: var(--azul);
+    color: var(--neutro);
+    padding: 1em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3em;
+}
+
+nav img {
+    height: 2em;
+    cursor: pointer;
+}
+
+nav span {
+    display: none;
+}
+
+nav a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.fa-circle-half-stroke {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* SECCIÓN DE TRABAJO */
+
+.seccion-hero {
+    background: var(--azul);
+    color: var(--neutro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.trabajo-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    padding: 1.5em;
+    background: var(--azul);
+    color: var(--neutro);
+    flex-wrap: wrap;
+}
+
+/* COLUMNA IZQUIERDA */
+
+.trabajo-izq {
+    flex: 1;
+    width: 60%;
+}
+
+/* FORMULARIO */
+
+.rowlabelinput {
+    display: flex;
+    gap: 1em;
+}
+
+.labelinput {
+    flex: 1;
+}
+
+/* Labels */
+
+.trabajo-form label {
+    font-size: 1em;
+    margin-bottom: -0.4rem;
+    display: block;
+    padding: 1em 1em 1em 0;
+    text-align: left;
+}
+
+/* Inputs */
+
+.trabajo-form input,
+.trabajo-form textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background: var(--neutro);
+    padding: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    color: var(--neutro_oscuro);
+}
+
+/* textarea ocupa todo */
+
+.trabajo-form textarea {
+    border-radius: 8px;
+    min-height: 140px;
+    resize: none;
+    padding: 20px;
+}
+
+.trabajo-form input:focus,
+.trabajo-form textarea:focus {
+    outline: 3px solid var(--rosa);
+}
+
+/* Label textarea */
+
+.trabajo-form label[for="mensaje"] {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Botones */
+
+.caja-btn {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.caja-btn button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 28px;
+    margin: 1.5em 1.5em 0 0;
+    font-weight: 800;
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(to right, var(--rosa), var(--verde));
+    color: var(--azul);
+    transition: 0.3s ease;
+    width: 200px;
+}
+
+.caja-btn button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* COLUMNA DERECHA */
+
+.trabajo-der {
+    flex: 1;
+    width: 40%;
+    min-width: 280px;
+}
+
+.trabajo-der img {
+    width: 100%;
+    height: 25em;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* SECCIÓN DE ANIMAL */
+
+.seccion-animal {
+    background: #E9C2FB;
+    color: var(--azul);
+    padding: 1.5em 0;
+}
+
+.seccion-animal h2 {
+    font-size: 2.5em;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.seccion-animal .msg {
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    padding: 1em;
+    background-color: var(--rosa);
+}
+
+.caja-form {
+    padding-top: 1.5em;
+}
+
+.caja-form>div {
+    text-align: center;
+    gap: 3em;
+    padding: 1.5em;
+    background-color: #E9C2FB;
+    color: var(--azul);
+}
+
+.caja-form>div h4 {
+    font-size: 1.25em;
+    line-height: 1.1;
+    text-align: center;
+    padding: 0.5em;
+    color: var(--azul);
+    line-height: 0.5em;
+}
+
+.form-part1-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-part1 {
+    background-color: var(--rosa);
+    border: var(--azul) 0.25em dotted;
+    width: 80%;
+    padding: 1.5em;
+}
+
+/* Contenedor general */
+
+.animal-form {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+/* Filas */
+
+.rowlabelinput {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Cada bloque label + input */
+
+.labelinput {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+
+.form-part1 label {
+    font-size: 0.95em;
+    margin-bottom: 0.3rem;
+    display: block;
+    text-align: left;
+}
+
+/* Inputs y selects */
+
+.form-part1 input,
+.form-part1 select {
+    width: 100%;
+    border: 0.2em solid var(--azul);
+    outline: none;
+    border-radius: 3em;
+    background: var(--neutro);
+    padding: 0.5em;
+    font-size: 1em;
+    font-family: inherit;
+    color: var(--neutro_oscuro);
+}
+
+.form-part1 .radios {
+    display: block;
+}
+
+.form-part1 .radios .opciones {
+    display: flex;
+    width: 18em;
+    gap: 1em;
+}
+
+input[type="radio"]:checked {
+    accent-color: var(--azul);
+}
+
+input[type="file"] {
+    content: 'Subir imagen del animal';
+}
+
+/* PARTE 2 */
+
+.algomas {
+    margin-top: 1.5em;
+    padding: 1.5em;
+}
+
+.form-part2 {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.form-part2-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.form-part2-left p {
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+/* Cada fila alineada */
+
+.checkbox-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.checkbox-row label {
+    flex: 1;
+}
+
+.checkbox-row input[type="checkbox"] {
+    margin-left: 1em;
+}
+
+input[type="checkbox"] {
+    accent-color: var(--azul);
+}
+
+/* Imagen derecha */
+
+.form-part2-right {
+    flex: 1;
+    display: flex;
+    width: 40%;
+}
+
+.form-part2-right img {
+    width: 100%;
+    height: 26em;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#caja-btn-form-animal button {
+    background: linear-gradient(to right, var(--azul), #00707f, var(--verde));
+    color: var(--neutro)
+}
+
+/* FOOTER */
+
+footer {
+    background-color: var(--azul);
+    color: var(--neutro);
+    text-align: center;
+    padding: 20px;
+    margin-top: 2em;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 1em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i {
+    font-size: 2em;
+}
+
+.bye {
+    margin-top: 1em;
+}
