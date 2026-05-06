@@ -50,7 +50,8 @@
             <h1>¿Quieres trabajar con nosotros?</h1>
             <div class="trabajo-hero">
                 <div class="trabajo-izq">
-                    <form action="subiranimal.php" method="post" class="trabajo-form">
+                    <form action="{{route('subirvoluntario')}}" method="post" class="trabajo-form">
+                        @csrf
                         <div class="rowlabelinput">
                             <div class="labelinput">
                                 <label for="nombre">Nombre (*):</label>
@@ -68,14 +69,14 @@
                             </div>
                             <div class="labelinput">
                                 <label for="telefono">Teléfono:</label>
-                                <input type="tel" id="telefono" aria-label="teléfono del usuario" name="telefono"><br>
+                                <input type="tel" id="telefono" aria-label="teléfono del usuario" name="telefono" maxlength="9"><br>
                             </div>
                         </div>
                         <label for="mensaje">¿Por qué quieres trabajar con nosotros?</label>
                         <textarea name="mensaje" id="mensaje" aria-multiline="true" minlength="0" maxlength="200" rows="5" cols="50" placeholder="Me gustaría trabajar aquí porque..."></textarea><br>
                         <div class="caja-btn">
                             <button type="submit" aria-label="enviar formulario"><i class="fa-solid fa-paper-plane"></i>ENVIAR</button>
-                            <button type="submit" aria-label="limpiar formulario"><i class="fa-solid fa-eraser"></i>LIMPIAR</button><br>
+                            <button type="reset" aria-label="limpiar formulario"><i class="fa-solid fa-eraser"></i>LIMPIAR</button><br>
                         </div>
                     </form>
                 </div>
@@ -85,7 +86,7 @@
             </div>
         </section>
         <section class="seccion-animal">
-            <h2>Hola nombre de usuario</h2>
+            <h2>Hola nombre de usuario</h2> <!--Cambiar cuando se sepa la implementación de los roles trabajador/admin-->
             <div class="msg">
                 <h3>Estamos deseando ampliar...</h3>
                 <h3>¿Nos ayudas?</h3>
@@ -96,7 +97,8 @@
                     <h4>Para añadir un nuevo amigo</h4>
                 </div>
                 <div>
-                    <form action="subiranimal.php" method="post" class="animal-form">
+                    <form action="{{route('subiranimal')}}" method="post" class="animal-form" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-part1-wrapper">
                             <div class="form-part1">
                                 <div class="rowlabelinput">
@@ -165,8 +167,8 @@
                                 </div>
                                 <div class="rowlabelinput">
                                     <div class="labelinput">
-                                        <label for="imagen">Imagen del animal:</label>
-                                        <input type="file" aria-label="archivo de imagen del animal" name="imagen" id="imagen" accept="image/*">
+                                        <label for="imagen">¿Existe alguna imagen del animal?</label>
+                                        <input type="file" aria-label="archivo de imagen del animal" enctype="multipart/form-data" name="imagen" id="imagen" accept="image/*">
                                     </div>
                                 </div>
                             </div>
@@ -177,49 +179,51 @@
                         <div class="form-part2">
                             <div class="form-part2-left">
                                 <p>Rasgos y atributos</p>
-
-                                <div class="checkbox-row">
-                                    <label for="docil">Dócil</label>
-                                    <input type="checkbox" id="docil" name="atributos[]" aria-label="atributo dócil">
+                                <div class="checkbox-container">
+                                    <div class="checkbox-row">
+                                        <label for="docil">Dócil</label>
+                                        <input type="checkbox" id="docil" name="atributos[]" value="docil" aria-label="atributo dócil">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="territorial">Territorial</label>
+                                        <input type="checkbox" id="territorial" name="atributos[]" value="territorial" aria-label="atributo territorial">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="nocturno">Nocturno</label>
+                                        <input type="checkbox" id="nocturno" name="atributos[]" value="nocturno" aria-label="atributo nocturno">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="sociable">Sociable</label>
+                                        <input type="checkbox" id="sociable" name="atributos[]" value="sociable" aria-label="atributo sociable">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="acuatico">Acuático</label>
+                                        <input type="checkbox" id="acuatico" name="atributos[]" value="acuatico" aria-label="atributo acuático">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="vuela">Vuela</label>
+                                        <input type="checkbox" id="vuela" name="atributos[]" value="vuela" aria-label="atributo vuela">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="cuidados">Cuidados especiales</label>
+                                        <input type="checkbox" id="cuidados" name="atributos[]" value="cuidadosespeciales" aria-label="atributo cuidados especiales">
+                                    </div>
+    
+                                    <div class="checkbox-row">
+                                        <label for="habitat">Hábitat especial</label>
+                                        <input type="checkbox" id="habitat" name="atributos[]" value="habitatespecial" aria-label="atributo hábitat especial">
+                                    </div>
                                 </div>
 
-                                <div class="checkbox-row">
-                                    <label for="territorial">Territorial</label>
-                                    <input type="checkbox" id="territorial" name="atributos[]" aria-label="atributo territorial">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="nocturno">Nocturno</label>
-                                    <input type="checkbox" id="nocturno" name="atributos[]" aria-label="atributo nocturno">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="sociable">Sociable</label>
-                                    <input type="checkbox" id="sociable" name="atributos[]" aria-label="atributo sociable">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="acuatico">Acuático</label>
-                                    <input type="checkbox" id="acuatico" name="atributos[]" aria-label="atributo acuático">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="vuela">Vuela</label>
-                                    <input type="checkbox" id="vuela" name="atributos[]" aria-label="atributo vuela">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="cuidados">Cuidados especiales</label>
-                                    <input type="checkbox" id="cuidados" name="atributos[]" aria-label="atributo cuidados especiales">
-                                </div>
-
-                                <div class="checkbox-row">
-                                    <label for="habitat">Hábitat especial</label>
-                                    <input type="checkbox" id="habitat" name="atributos[]" aria-label="atributo hábitat especial">
-                                </div>
                                 <div class="caja-btn" id="caja-btn-form-animal">
                                     <button type="submit" aria-label="enviar formulario"><i class="fa-solid fa-paper-plane"></i>ENVIAR</button>
-                                    <button type="submit" aria-label="limpiar formulario"><i class="fa-solid fa-eraser"></i>LIMPIAR</button><br>
+                                    <button type="reset" aria-label="limpiar formulario"><i class="fa-solid fa-eraser"></i>LIMPIAR</button><br>
                                 </div>
                             </div>
 
@@ -243,7 +247,7 @@
         <hr>
         <div class="bye">
             <p>Copyright &copy; 2026 Santuario de la Frontera. Todos los derechos reservados.</p>
-            <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carroña - Marcos García Bravo</p>
+            <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos García Bravo</p>
         </div>
     </footer>
 </body>

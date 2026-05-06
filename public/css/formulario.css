@@ -334,7 +334,7 @@ input[type="file"] {
 .form-part2 {
     display: flex;
     align-items: stretch;
-    gap: 2rem;
+    gap: 2em;
 }
 
 .form-part2-left {
@@ -350,16 +350,23 @@ input[type="file"] {
 }
 
 /* Cada fila alineada */
+.checkbox-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
 .checkbox-row {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
+    max-width: 10em;
 }
 
 .checkbox-row label {
     flex: 1;
+    width: 10em;
 }
 
 .checkbox-row input[type="checkbox"] {
