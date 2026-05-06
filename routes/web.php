@@ -14,8 +14,12 @@ Route::get('/', function () {
 });
 */
 
-// El primer parametro es la ruta a la que se accede (/perfil) y luego la clase (UserController) y el metodo (mostrar) de la clase al que accedemos
+// El primer parámetro es la ruta a la que se accede (/) y luego la clase (IndexController) y el metodo (mostrar) de la clase al que accedemos
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/formulario', [FormularioController::class, 'index'])->name('formulario');
 Route::get('/perfil', [UserController::class, 'mostrar']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Formularios
+Route::post('/formulario/voluntarios', [FormularioController::class, 'storevoluntario'])->name('subirvoluntario');
+Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])->name('subiranimal');
