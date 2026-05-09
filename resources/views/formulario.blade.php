@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <meta name="author" content="Javier Alcoba Navero, Claudia García-Matarredona Urbano, Jesús Fernández Carreño, Marcos García Bravo">
     <meta name="robots" content="index, follow">
     <meta name="language" content="spanish">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +22,8 @@
         }
     </style>
     <link rel="stylesheet" href="{{asset('css/formulario.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
+    <script src="{{asset('js/cookies.js')}}"></script>
     <title>Formulario</title>
 </head>
 
@@ -104,12 +108,12 @@
                                 <div class="rowlabelinput">
                                     <div class="labelinput">
                                         <label for="nombre">Nombre (*):</label>
-                                        <input type="text" id="nombre" aria-label="nombre del animal" name="nombre" placeholder="Melocotón" required>
+                                        <input type="text" aria-label="nombre del animal" name="nombre" placeholder="Melocotón" required>
                                     </div>
                                     <div class="labelinput">
                                         <label for="grupo">Grupo (*):</label>
                                         <select name="grupo" id="grupo" aria-label="grupo al que pertenece el animal" required>
-                                            <option value="">Grupo</option>
+                                            <option value="">Selecciona un grupo</option>
                                             <option value="mamífero">Mamífero</option>
                                             <option value="ave">Ave</option>
                                             <option value="reptil">Reptil</option>
@@ -130,7 +134,7 @@
                                         <label for="sexo">Sexo (*):</label><br>
                                         <div class="opciones">
                                             <label for="sexo">Macho:</label>
-                                            <input type="radio" id="sexo" aria-label="sexo del animal" name="sexo" value="macho" required>
+                                            <input type="radio" aria-label="sexo del animal" name="sexo" value="macho" required>
                                             <label for="sexo">Hembra:</label>
                                             <input type="radio" aria-label="sexo del animal" name="sexo" value="hembra">
                                         </div>
@@ -149,7 +153,7 @@
                                         <label for="castrado">Castrado (*):</label>
                                         <div class="opciones">
                                             <label for="castrado">Sí:</label>
-                                            <input type="radio" id="castrado" aria-label="el animal está castrado" name="castrado" value="si" required>
+                                            <input type="radio" aria-label="el animal está castrado" name="castrado" value="si" required>
                                             <label for="castrado">No:</label>
                                             <input type="radio" aria-label="el animal está castrado" name="castrado" value="no">
                                         </div>
@@ -157,7 +161,7 @@
                                     <div class="labelinput">
                                         <label for="alimentacion">Alimentación (*):</label>
                                         <select name="alimentacion" id="alimentacion" aria-label="alimentación del animal" required>
-                                            <option value="">Alimentación</option>
+                                            <option value="">Selecciona su alimentación</option>
                                             <option value="carnívoro">Carnívoro</option>
                                             <option value="herbívoro">Herbívoro</option>
                                             <option value="omnivoro">Omnívoro</option>
@@ -184,37 +188,37 @@
                                         <label for="docil">Dócil</label>
                                         <input type="checkbox" id="docil" name="atributos[]" value="docil" aria-label="atributo dócil">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="territorial">Territorial</label>
                                         <input type="checkbox" id="territorial" name="atributos[]" value="territorial" aria-label="atributo territorial">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="nocturno">Nocturno</label>
                                         <input type="checkbox" id="nocturno" name="atributos[]" value="nocturno" aria-label="atributo nocturno">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="sociable">Sociable</label>
                                         <input type="checkbox" id="sociable" name="atributos[]" value="sociable" aria-label="atributo sociable">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="acuatico">Acuático</label>
                                         <input type="checkbox" id="acuatico" name="atributos[]" value="acuatico" aria-label="atributo acuático">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="vuela">Vuela</label>
                                         <input type="checkbox" id="vuela" name="atributos[]" value="vuela" aria-label="atributo vuela">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="cuidados">Cuidados especiales</label>
                                         <input type="checkbox" id="cuidados" name="atributos[]" value="cuidadosespeciales" aria-label="atributo cuidados especiales">
                                     </div>
-    
+
                                     <div class="checkbox-row">
                                         <label for="habitat">Hábitat especial</label>
                                         <input type="checkbox" id="habitat" name="atributos[]" value="habitatespecial" aria-label="atributo hábitat especial">
@@ -250,6 +254,22 @@
             <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos García Bravo</p>
         </div>
     </footer>
+
+    @if(!request()->cookie('cookies_consent'))
+    <div class="cookie-banner">
+        <img src="{{asset('img/cookie.png')}}" alt="Cookie con forma de corazón">
+        <div class="cookie-msg">
+            <p>Usamos cookies para mejorar tu experiencia</p>
+            <p>Las cookies web son pequeños archivos de texto que los sitios web almacenan en el navegador del usuario para recordar información sobre su visita.</p>
+            Mejoran la experiencia de navegación al recordar accesos, preferencias y carritos de compra, aunque algunas rastrean hábitos para marketing.</p>
+            Se pueden gestionar desde la configuración del navegador. Santuario de la Frontera &copy no distribuye información personal a terceros ni asociados.</p>
+            <div class="caja-btn-cookies">
+                <button type="button" aria-label="aceptar" id="cookies-aceptar">ACEPTAR</button>
+                <button type="button" aria-label="rechazar" id="cookies-rechazar">RECHAZAR</button><br>
+            </div>
+        </div>
+    </div>
+    @endif
 </body>
 
 </html>

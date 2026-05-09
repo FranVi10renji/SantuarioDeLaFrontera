@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\CookieController;
 
 /*
 Route::get('/', function () { 
@@ -23,3 +24,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Formularios
 Route::post('/formulario/voluntarios', [FormularioController::class, 'storevoluntario'])->name('subirvoluntario');
 Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])->name('subiranimal');
+
+// Cookies
+Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
+Route::post('/rechazar-cookies', [CookieController::class, 'rechazar']);
