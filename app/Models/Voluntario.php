@@ -12,6 +12,6 @@ class Voluntario extends Model
         'email',
         'telefono',
         'mensaje',
-        // 'es_trab', // ????
+        'es_trabaj',
     ];
 }
