@@ -19,4 +19,16 @@ class Animal extends Model
         'imagen',
         'atributos'
     ];
+
+    protected $casts = [
+        'rasgos' => 'array',
+        'castrado' => 'boolean',
+    ];
+
+    public function donantes()
+    {
+        return $this->belongsToMany(User::class)
+                    ->withPivot('cantidad')
+                    ->withTimestamps();
+    }
 }
