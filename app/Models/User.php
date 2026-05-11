@@ -19,9 +19,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nombre',
+        'apellido',
         'email',
         'password',
+        'usuario',
+        'cuenta_bancaria',
+        'es_trabaj',
     ];
 
     /**
@@ -45,5 +49,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function animales()
+    {
+        return $this->belongsToMany(Animal::class)
+                    ->withPivot('cantidad')
+                    ->withTimestamps();
     }
 }
