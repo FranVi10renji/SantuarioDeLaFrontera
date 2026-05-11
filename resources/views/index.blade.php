@@ -25,12 +25,32 @@
 </head>
 
 <body>
-    <h1>Hola soy la página de visualización de animales (index)</h1>
-    <p>Completa mi HTML y dame estilo con CSS</p>
-    <small>(Puedes consultarme como soy en el Figma 🫣)</small>
-
-    <p>Puedo redirigirte a una página ya conectada en Laravel y HTML</p>
-    <a href="{{route('formulario')}}">FORMULARIO</a>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{route('index')}}"><span>Logo</span><img src="{{asset('img/logo_2.png')}}" alt="Logo del santuario"></a>
+                </li>
+                <li>
+                    <a href="{{route('index')}}">INICIO</a>
+                </li>
+                <li>
+                    <a href="{{route('formulario')}}">FORMULARIO</a>
+                </li>
+                <li>
+                    <a href="{{route('dashboard')}}">DASHBOARD</a> <!--Esconder esto si no es admin-->
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section> 
+            
+        </section>
+    </main>
 </body>
 
 </html>

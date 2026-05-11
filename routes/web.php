@@ -9,11 +9,11 @@ use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CookieController;
 
-/*
-Route::get('/', function () { 
-    return view('welcome'); 
-});
-*/
+
+// Route::get('/', function () { 
+//     return view('index'); 
+// });
+
 
 // El primer parámetro es la ruta a la que se accede (/) y luego la clase (IndexController) y el metodo (mostrar) de la clase al que accedemos
 Route::get('/', [IndexController::class, 'index'])->name('index');
