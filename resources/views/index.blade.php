@@ -47,10 +47,190 @@
         </nav>
     </header>
     <main>
-        <section> 
+        <section class="Titulo"> 
+            <h1> SANTUARIO DE LA FRONTERA </h1>
+        </section>
+
+        <section class="Intro">
+            <h3> ¿Quiénes somos? </h3>
+            <div class="Sipnosis">
+                <div class="Sipnosis_izq">
+                    <p>Somos un equipo apasionado de profesionales y voluntarios dedicados al rescate, rehabilitación y protección de animales en situación de vulnerabilidad. Ubicados en el corazón de Campano, Chiclana de la Frontera. Santuario de la Frontera nace no solo como un refugio físico, sino como un hogar donde cada especie recibe una segunda oportunidad. Creemos firmemente que cada animal merece vivir con dignidad, respeto y los cuidados veterinarios necesarios para su pleno desarrollo.</p>
+                </div>
+                <div class="Sipnosis_der">
+                    <img src="{{asset('img/caballos.jpg')}}" alt="Lémur">
+                </div>
+            </div>
+            <h3> Nuestra misión </h3>
+            <div class="Mision">
+                <div class="Mision_izq">
+                    <img src="{{asset('img/geco.jpg')}}" alt="Cocodrilo">
+                </div>
+                <div class="Mision_der">
+                    <p>Nuestra misión es transformar la realidad de los animales desprotegidos mediante la intervención directa y la concienciación social. Nos enfocamos en el rescate ético, la búsqueda de hogares responsables a través de la adopción y la gestión transparente de recursos y donaciones. Queremos ser un referente de bienestar animal en Andalucía, fomentando una comunidad donde el voluntariado y la educación sean los pilares para erradicar el abandono y el maltrato.</p>
+                    <div class="Ayuda"> <!--Esto sólo le puede salir a un usuario normal-->
+                        <div class="Ayuda_izq">
+                            ¿Nos quieres ayudar?
+                        </div>
+                        <div class="Ayuda_der">
+                            <a href="{{route('formulario')}}"><button class="btn-formulario">Apúntate como voluntario</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Estadisticas">
+                <div class="Estadistica-item">
+                    <i class="fas fa-paw"></i> <h2>150+</h2>
+                    <p>Animales protegidos</p>
+                </div>
+
+                <div class="Estadistica-item">
+                    <i class="fas fa-user"></i> <h2>50+</h2>
+                    <p>Trabajadores voluntarios</p>
+                </div>
+
+                <div class="Estadistica-item">
+                    <i class="fas fa-shield-alt"></i> <h2>100000+</h2>
+                    <p>donaciones para mejorar su vida</p>
+                </div>
+            </div>
+            <div class="Boton-container"> <!--Esto sólo le puede salir al admin-->
+                <a href="{{route('dashboard')}}"><button class="btn-stats">Consulta todas las estadísticas</button></a>
+            </div>
+        </section>
+
+        <section class="Animales">
+            <h1>CONOCE A NUESTROS ANIMALES</h1>
             
+            <div class="Opciones">
+                <div class="Card-Info">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <p><strong>Puedes donar cualquier cantidad a tantos animales como desees</strong></p>
+                    <p>¡Ayúdanos a mantener su vida!</p>
+                </div>
+                <div class="Card-Info">
+                    <i class="fas fa-home"></i>
+                    <p><strong>¿Te interesa adoptar?</strong></p>
+                    <p>Nuestros animales necesitan un hogar</p>
+                    <p>Ofrecemos <strong>perros, gatos</strong> y <strong>conejos</strong></p>
+                </div>
+            </div>
+
+            <div class="Barra-Busqueda">
+                <div class="input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <p>Buscar por </p>
+                </div>
+                <select>
+                    <option>Especie</option>
+                    <option>Grupo</option>
+                    <option>Nacimiento</option>
+                    <option>Sexo</option>
+                    <option>Tamaño</option>
+                    <option>Alimentación</option>                    
+                </select>
+                <button class="btn-reset"><i class="fas fa-sync-alt"></i></button>
+            </div>
+
+            <div class="Grid-Animales">
+                {{-- @foreach ($animales as $animal) --}}
+                    <div class="Animal-Card">
+                        <!--Versión dinámica-->
+                        {{-- <div class="Card-Imagen">
+                            <img src="{{ asset('img/animals/' . $animal->imagen) }}" alt="{{ $animal->nombre }}">
+                            
+                            <span class="Icono-Sexo {{ strtolower($animal->sexo) == 'h' ? 'hembra' : 'macho' }}">
+                                <i class="fas fa-{{ strtolower($animal->sexo) == 'h' ? 'venus' : 'mars' }}"></i>
+                            </span>
+                        </div>
+
+                        <div class="Card-Detalles">
+                            <h3 class="Nombre-Animal">{{ strtoupper($animal->nombre) }}</h3>
+                            
+                            <div class="Atributos-Lista">
+                                <p><strong>Especie:</strong> {{ $animal->especie }}</p>
+                                <p><strong>Grupo:</strong> {{ $animal->grupo }}</p>
+                                <p><strong>Año de nacimiento:</strong> {{ $animal->nacimiento }}</p>
+                                <p><strong>Peso:</strong> {{ $animal->peso }} kg</p>
+                                <p><strong>Tamaño:</strong> {{ $animal->tamaño }}</p>
+                            </div> --}}
+
+                        <!-- Versión estática -->
+                        <div class="Card-Imagen">
+                            <img src="img/animals/default-animal.png" alt="Nombre del animal">
+                            
+                            <span class="Icono-Sexo hembra">
+                                <i class="fas fa-venus"></i>
+                            </span>
+                        </div>
+
+                        <div class="Card-Detalles">
+                            <h3 class="Nombre-Animal">NOMBRE</h3>
+                            
+                            <div class="Atributos-Lista">
+                                <p><strong>Especie:</strong> Default</p>
+                                <p><strong>Grupo:</strong> Default</p>
+                                <p><strong>Año de nacimiento:</strong> Default</p>
+                                <p><strong>Peso:</strong> Default kg</p>
+                                <p><strong>Tamaño:</strong> Default</p>
+                            </div>
+
+                            <div class="Botones-Grupo">
+                                <button class="btn-apadriname">APADRÍNAME <i class="fas fa-arrow-right"></i></button>
+
+                                @php
+                                    $adoptables = ['perro', 'gato', 'conejo'];
+                                @endphp
+                                
+                                @if(in_array(strtolower('perro'), $adoptables))
+                                    <button class="btn-adoptar">ADÓPTAME <i class="fas fa-heart"></i></button>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                {{-- @endforeach --}}
+            </div>
+        </section>
+
+        <section class="Mapa">
+            <h2>
+                ¿Quieres conocernos más de cerca?
+            </h2>
+            <h2>    
+                ¡Visítanos en Campano, Chiclana de la Frontera!
+            </h2>
+            <div class="Foto-mapa">
+                <img src="{{asset('img/mapa.png')}}" alt="Ubicación del santuario">
+            </div>
+            <footer class="Contacto-bar">
+                <div class="contacto-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>santuariodelafra_official</span>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fab fa-tiktok"></i>
+                    <span>santuariodelafra_official</span>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+34 753 67 19 01</span>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Chiclana (Cádiz, Andalucía)</span>
+                </div>
+
+                <div class="contacto-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>santuariofrontera@gmail.com</span>
+                </div>
+            </footer>
         </section>
     </main>
+    <script src="{{ asset('js/filtros.js') }}"></script>
 </body>
 
 </html>
