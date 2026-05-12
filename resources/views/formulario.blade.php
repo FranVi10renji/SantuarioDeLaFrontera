@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('css/formulario.css')}}">
     <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
     <script src="{{asset('js/cookies.js')}}"></script>
+    <script src="{{asset('js/darkmode.js')}}"></script>
     <title>Formulario</title>
 </head>
 
