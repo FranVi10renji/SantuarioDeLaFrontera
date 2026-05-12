@@ -1,11 +1,14 @@
 /* CONFIG INCIAL */
 
 :root {
-    --azul: #0A2E36;
+    --azul-bg: #0A2E36;
+    --azul-txt: #0A2E36;
     --verde: #82D382;
     --rosa: #C687E3;
     --neutro: #D9D9D9;
     --neutro_oscuro: #222;
+    --aux: #00707f;
+    --bg: #E9C2FB;
 }
 
 * {
@@ -15,13 +18,24 @@
 }
 
 body {
-    background-color: #E9C2FB;
+    background-color: var(--bg);
+}
+
+body.dark-mode{
+    --azul-bg: #071e23;
+    --azul-txt: #d9d9d9;
+    --verde: #315631;
+    --rosa: #35233d;
+    --neutro: #d9d9d9;
+    --neutro_oscuro: #222;
+    --aux: #003b42;
+    --bg: #6f4c80;
 }
 
 /* HEADER */
 
 header {
-    background-color: var(--azul);
+    background-color: var(--azul-bg);
     color: var(--neutro);
     padding: 1em;
 }
@@ -62,7 +76,7 @@ nav a:hover {
 /* SECCIÓN DE TRABAJO */
 
 .seccion-hero {
-    background: var(--azul);
+    background: var(--azul-bg);
     color: var(--neutro);
     display: flex;
     flex-direction: column;
@@ -84,7 +98,7 @@ h1 {
     align-items: center;
     gap: 3em;
     padding: 1.5em;
-    background: var(--azul);
+    background: var(--azul-bg);
     color: var(--neutro);
     flex-wrap: wrap;
 }
@@ -175,7 +189,7 @@ h1 {
     justify-content: center;
     gap: 10px;
     background: linear-gradient(to right, var(--rosa), var(--verde));
-    color: var(--azul);
+    color: var(--azul-txt);
     transition: 0.3s ease;
     width: 200px;
 }
@@ -203,8 +217,8 @@ h1 {
 /* SECCIÓN DE ANIMAL */
 
 .seccion-animal {
-    background: #E9C2FB;
-    color: var(--azul);
+    background: var(--bg);
+    color: var(--azul-txt);
     padding: 1.5em 0;
 }
 
@@ -233,8 +247,8 @@ h1 {
     text-align: center;
     gap: 3em;
     padding: 1.5em;
-    background-color: #E9C2FB;
-    color: var(--azul);
+    background-color: var(--bg);
+    color: var(--azul-txt);
 }
 
 .caja-form>div h4 {
@@ -242,7 +256,7 @@ h1 {
     line-height: 1.1;
     text-align: center;
     padding: 0.5em;
-    color: var(--azul);
+    color: var(--azul-txt);
     line-height: 0.5em;
 }
 
@@ -254,7 +268,7 @@ h1 {
 
 .form-part1 {
     background-color: var(--rosa);
-    border: var(--azul) 0.25em dotted;
+    border: var(--azul-bg) 0.25em dotted;
     width: 80%;
     padding: 1.5em;
 }
@@ -296,7 +310,7 @@ h1 {
 .form-part1 input,
 .form-part1 select {
     width: 100%;
-    border: 0.2em solid var(--azul);
+    border: 0.2em solid var(--azul-bg);
     outline: none;
     border-radius: 3em;
     background: var(--neutro);
@@ -317,7 +331,7 @@ h1 {
 }
 
 input[type="radio"]:checked {
-    accent-color: var(--azul);
+    accent-color: var(--azul-bg);
 }
 
 input[type="file"] {
@@ -374,7 +388,7 @@ input[type="file"] {
 }
 
 input[type="checkbox"] {
-    accent-color: var(--azul);
+    accent-color: var(--azul-bg);
 }
 
 /* Imagen derecha */
@@ -393,14 +407,14 @@ input[type="checkbox"] {
 }
 
 #caja-btn-form-animal button {
-    background: linear-gradient(to right, var(--azul), #00707f, var(--verde));
+    background: linear-gradient(to right, var(--azul-bg), var(--aux), var(--verde));
     color: var(--neutro)
 }
 
 /* FOOTER */
 
 footer {
-    background-color: var(--azul);
+    background-color: var(--azul-bg);
     color: var(--neutro);
     text-align: center;
     padding: 20px;
