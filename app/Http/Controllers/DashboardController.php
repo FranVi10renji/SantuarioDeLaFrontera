@@ -14,17 +14,14 @@ class DashboardController extends Controller
         $adminName = Auth::check() ? Auth::user()->nombre : 'Administrador';
 
 
-        // Animales totales
         $animalesTotales = Animal::count();
 
-        // Especie más presente
         $especieMasPresente = Animal::select('especie', DB::raw('count(*) as total'))
             ->groupBy('especie')
             ->orderByDesc('total')
             ->first();
         $nombreEspecie = $especieMasPresente ? $especieMasPresente->especie : 'N/A';
 
-        // Animal más donado 
         $animalMasDonadoData = DB::table('animal_user')
             ->select('animal_id', DB::raw('SUM(cantidad) as total_recibido'))
             ->groupBy('animal_id')
@@ -32,51 +29,64 @@ class DashboardController extends Controller
             ->first();
         $animalMasDonado = $animalMasDonadoData ? Animal::find($animalMasDonadoData->animal_id)->nombre : 'Ninguno';
 
-        // Trabajadores totales
         $trabajadoresTotales = User::where('es_trabaj', true)->count();
 
-        // Cantidad más alta donada 
         $cantidadMasAlta = DB::table('animal_user')->max('cantidad') ?? 0;
 
-        // Dinero total del santuario
         $dineroTotal = DB::table('animal_user')->sum('cantidad') ?? 0;
 
-        //TABLA
-
-        // 1. Lógica para los Animales
         $queryAnimales = Animal::query();
 
-        // ¿Han pedido ordenarlo?
         if ($request->has('orden_animal')) {
-            $queryAnimales->orderBy($request->orden_animal, 'asc'); // asc = de la A a la Z, o menor a mayor
+            $direccion = $request->dir_animal ?? 'asc';
+            $queryAnimales->orderBy($request->orden_animal, $direccion);
         } else {
-            $queryAnimales->orderByDesc('id'); // Por defecto, los últimos añadidos
+            $queryAnimales->orderByDesc('id');
         }
 
-        // ¿Han pedido mostrar todos?
         if (!$request->has('todos_animales')) {
-            $queryAnimales->take(5); // Si no, limitamos a 5
+            $queryAnimales->take(5);
         }
 
         $animales = $queryAnimales->get();
         
 
-        // 2. Lógica para los Trabajadores
+        //Lógica para los Trabajadores
         $queryTrabajadores = User::where('es_trabaj', true);
 
-        // ¿Han pedido ordenarlo?
         if ($request->has('orden_trabajador')) {
-            $queryTrabajadores->orderBy($request->orden_trabajador, 'asc');
+            $direccion = $request->dir_trabajador ?? 'asc';
+            $queryTrabajadores->orderBy($request->orden_trabajador, $direccion);
         } else {
             $queryTrabajadores->orderByDesc('id');
         }
 
-        // ¿Han pedido mostrar todos?
         if (!$request->has('todos_trabajadores')) {
             $queryTrabajadores->take(5);
         }
 
         $trabajadores = $queryTrabajadores->get();
+
+        //Gráfica sexos
+        $graficaSexo = Animal::select('sexo', DB::raw('count(*) as total'))
+            ->groupBy('sexo')
+            ->pluck('total', 'sexo')
+            ->toArray();
+
+        //Gráfica especies
+        $graficaEspecies = Animal::select('especie', DB::raw('count(*) as total'))
+            ->groupBy('especie')
+            ->pluck('total', 'especie')
+            ->toArray();
+
+        //Gráfica atributos
+        $graficaRasgos = Animal::whereNotNull('rasgos')
+            ->pluck('rasgos')
+            ->flatten()
+            ->countBy()
+            ->sortDesc()
+            ->take(7) 
+            ->toArray();
 
         return view('dashboard', [
             'adminName' => $adminName,
@@ -89,7 +99,10 @@ class DashboardController extends Controller
                 'dineroTotal' => $dineroTotal
             ],
             'animales' => $animales,
-            'trabajadores' => $trabajadores
+            'trabajadores' => $trabajadores,
+            'graficaSexo' => $graficaSexo,
+            'graficaEspecies' => $graficaEspecies,
+            'graficaRasgos' => $graficaRasgos
         ]);
     }
 

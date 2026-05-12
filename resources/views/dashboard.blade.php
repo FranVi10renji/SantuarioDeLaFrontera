@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -119,6 +120,8 @@
                         <input type="hidden" name="todos_animales" value="1">
                     @endif
 
+                    <input type="hidden" name="dir_animal" value="{{ request('dir_animal', 'asc') == 'asc' ? 'desc' : 'asc' }}">
+
                     <label>Ordenar por:</label>
                     <select name="orden_animal">
                         <option value="nombre" {{ request('orden_animal') == 'nombre' ? 'selected' : '' }}>Nombre</option>
@@ -127,7 +130,14 @@
                         <option value="tamaño" {{ request('orden_animal') == 'tamaño' ? 'selected' : '' }}>Tamaño</option>
                         <option value="peso" {{ request('orden_animal') == 'peso' ? 'selected' : '' }}>Peso</option>
                     </select>
-                    <button type="submit" class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+                    
+                    <button type="submit" class="btn-icon">
+                        @if(request('dir_animal', 'asc') == 'asc')
+                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                        @else
+                            <i class="fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                    </button>
                 </form>
 
                 <div class="tabla-responsive">
@@ -241,12 +251,21 @@
                         <input type="hidden" name="todos_trabajadores" value="1">
                     @endif
 
+                    <input type="hidden" name="dir_trabajador" value="{{ request('dir_trabajador', 'asc') == 'asc' ? 'desc' : 'asc' }}">
+
                     <label>Ordenar por:</label>
                     <select name="orden_trabajador">
                         <option value="nombre" {{ request('orden_trabajador') == 'nombre' ? 'selected' : '' }}>Nombre</option>
                         <option value="apellido" {{ request('orden_trabajador') == 'apellido' ? 'selected' : '' }}>Apellido</option>
                     </select>
-                    <button type="submit" class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+                    
+                    <button type="submit" class="btn-icon">
+                        @if(request('dir_trabajador', 'asc') == 'asc')
+                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                        @else
+                            <i class="fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                    </button>
                 </form>
 
                 <div class="tabla-responsive">
@@ -269,7 +288,7 @@
                                 <td>{{ $trabajador->apellido }}</td>
                                 <td>{{ $trabajador->email }}</td>
                                 <td>{{ $trabajador->telefono ?? 'null' }}</td>
-                                <td>{{ $trabajador->es_trabaj ? 'Admin/Voluntario' : 'Usuario' }}</td>
+                                <td>{{ $trabajador->es_trabaj ? 'Trabajador' : 'Usuario' }}</td>
 
                                 <td class="td-icono">
                                     <form action="{{ route('dashboard.trabajador.eliminar', $trabajador->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar al trabajador {{ $trabajador->nombre }}?');">
@@ -316,6 +335,24 @@
                     <button type="submit" class="btn-dark" style="padding: 5px 15px; margin-left: 10px;">Guardar <i class="fa-solid fa-check"></i></button>
                 </form>
             </section>
+            
+            <h1 style="text-align: center; margin-top: 100px; margin-bottom: 60px;">Estadísticas del Santuario</h1>
+
+            <div style="width: 80%; margin: 0 auto; padding: 20px; background: transparent; margin-bottom: 30px;">
+                <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Atributos de los Animales</h3> 
+                <canvas id="chartAtributos" height="80"></canvas>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; width: 90%; margin: 0 auto 50px auto; gap: 20px;">
+                <div style="width: 45%; padding: 20px; background: transparent;">
+                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Clasificación por sexo</h3> 
+                    <canvas id="chartSexo"></canvas>
+                </div>
+                <div style="width: 45%; padding: 20px; background: transparent;">
+                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Tipos de animales</h3> 
+                    <canvas id="chartEspecies"></canvas>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
@@ -350,8 +387,8 @@
     @endif
 
     <script>
-        //script para la edicion de animales, con dos partes:
-        // 1. Cuando hacen clic en el lápiz con animal
+        //script para la edicion de animales
+        //Cuando hacen clic en el lápiz con animal
         function seleccionarAnimal(id, nombre) {
             document.getElementById('form-editar-animal').style.display = 'inline-flex';
             
@@ -361,7 +398,7 @@
             cambiarInputAnimal();
         }
 
-        // 2. Lógica para animal
+        //Lógica para animal
         function cambiarInputAnimal() {
             const campo = document.getElementById('edit_animal_campo').value;
             const contenedor = document.getElementById('contenedor_valor_animal');
@@ -401,7 +438,7 @@
             contenedor.innerHTML = html;
         }
 
-        //3. Cuando hacen clic en el lápiz del trabajador
+        //Cuando hacen clic en el lápiz del trabajador
         function seleccionarTrabajador(id, nombreCompleto) {
             document.getElementById('form-editar-trabajador').style.display = 'inline-flex';
             document.getElementById('edit_trabajador_id').value = id;
@@ -409,7 +446,7 @@
             cambiarInputTrabajador();
         }
 
-        //4. Lógica para trabajador
+        //Lógica para trabajador
         function cambiarInputTrabajador() {
             const campo = document.getElementById('edit_trabajador_campo').value;
             const contenedor = document.getElementById('contenedor_valor_trabajador');
@@ -417,7 +454,7 @@
 
             if (campo === 'es_trabaj') {
                 html = `<select name="valor" required>
-                            <option value="1">Admin / Voluntario (Sí)</option>
+                            <option value="1">Trabajador (Sí)</option>
                             <option value="0">Usuario normal (No)</option>
                         </select>`;
             } 
@@ -447,6 +484,68 @@
         window.onbeforeunload = function(e) {
             localStorage.setItem('scrollpos', window.scrollY);
         };
+    </script>
+
+    <script>
+        //Scrip para graficas
+        const datosSexo = @json($graficaSexo);
+        const datosEspecies = @json($graficaEspecies);
+        const datosRasgos = @json($graficaRasgos);
+
+        //Gráfica de atributos
+        new Chart(document.getElementById('chartAtributos'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(datosRasgos),
+                datasets: [{
+                    label: 'Cantidad',
+                    data: Object.values(datosRasgos), 
+                    backgroundColor: '#8b7cf6', 
+                    borderRadius: 20,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        //Gráfica de sexos 
+        new Chart(document.getElementById('chartSexo'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(datosSexo),
+                datasets: [{
+                    data: Object.values(datosSexo),
+                    backgroundColor: ['#ff9999', '#8b7cf6', '#66b3ff'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        //Gráfica de especies
+        new Chart(document.getElementById('chartEspecies'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(datosEspecies),
+                datasets: [{
+                    data: Object.values(datosEspecies),
+                    backgroundColor: ['#8b7cf6', '#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom' } 
+                }
+            }
+        });
     </script>
 
 </body>
