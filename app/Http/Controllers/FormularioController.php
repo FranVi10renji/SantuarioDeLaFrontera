@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Animal;
-use App\Models\Voluntario;
+use App\Models\User;
 
 class FormularioController extends Controller
 {
@@ -25,15 +25,15 @@ class FormularioController extends Controller
             'mensaje' => 'nullable|string|max:200',
         ]);
 
-        // Guardar en BD
-        Voluntario::create([
+        // Promocionar usuario a trabajador actualizando atributo en BD
+        User::create([
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos,
             'email' => $request->email,
             'telefono' => $request->telefono,
             'mensaje' => $request->mensaje,
             // Creo que hay que ponerle un numerito como que ahora el user se promociona a voluntario
-            // 'es_trab' => 1, // No sé exactamente si era (0 user; 1 trabajador; 2 admin) ???
+            'es_trabaj' => 1, // No sé exactamente si era (0 user; 1 trabajador; 2 admin) ???
         ]);
 
         return back()->with('success', 'Datos enviados correctamente');
