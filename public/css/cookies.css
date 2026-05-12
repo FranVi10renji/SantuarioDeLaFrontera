@@ -1,6 +1,7 @@
 /* CONFIG DE BANNER DE COOKIES */
 :root {
     --azul: #0A2E36;
+    --azulbtn: #0A2E36;
     --verde: #82D382;
     --neutro: #D9D9D9;
 }
@@ -28,6 +29,13 @@
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.5s ease;
+}
+
+.cookie-banner.dark-mode{
+    --azul: #d9d9d9;
+    --azulbtn: #0A2E36;
+    --verde: #315631;
+    --neutro: #D9D9D9;
 }
 
 .cookie-banner.show {
@@ -63,12 +71,12 @@
 }
 
 #cookies-aceptar{
-    background-color: var(--azul);
+    background-color: var(--azulbtn);
     color: var(--neutro);
 }
 
 #cookies-rechazar{
     background-color: var(--verde);
     color: var(--azul);
-    border: 0.1em solid var(--azul);
+    border: 0.1em solid var(--azulbtn);
 }

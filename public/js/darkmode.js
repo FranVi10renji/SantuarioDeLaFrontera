@@ -1,13 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const btn = document.querySelector('.fa-circle-half-stroke');
+    const cookiebanner = document.querySelector('.cookie-banner');
 
     if (localStorage.getItem('theme') === 'dark')
+    {
         document.body.classList.add('dark-mode');
+        cookiebanner.classList.add('dark-mode');
+    }
 
     btn.addEventListener('click', () => {
 
         document.body.classList.toggle('dark-mode');
+        cookiebanner.classList.toggle('dark-mode');
 
         localStorage.setItem(
             'theme',
