@@ -2,10 +2,14 @@
 
 :root {
     --azul: #0A2E36;
+    --azul-texto: #0A2E36;
+    --azul-claro: #1e90ff;
     --verde: #82D382;
     --rosa: #C687E3;
     --neutro: #D9D9D9;
-    --gris-claro: #e1e1e1; 
+    --neutro-texto: #D9D9D9;
+    --negro: #000;
+    --blanco: #FFF;
 }
 
 * {
@@ -15,15 +19,25 @@
 }
 
 body {
-    background-color: var(--gris-claro); 
+    background-color: var(--neutro); 
     font-family: "Madimi One", sans-serif;
+}
+
+body.dark-mode{
+    --azul: #071e23;
+    --azul-texto: #12748a;
+    --azul-claro: #0e5398;
+    --verde: #315631;
+    --rosa: #981659;
+    --neutro: #222;
+    --negro: #D9D9D9;
 }
 
 /* HEADER */
 
 header {
     background-color: var(--azul);
-    color: var(--neutro);
+    color: var(--neutro-texto);
     padding: 1em;
 }
 
@@ -45,7 +59,7 @@ nav span {
 }
 
 nav a {
-    color: var(--neutro);
+    color: var(--neutro-texto);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.5em;
@@ -64,7 +78,7 @@ nav a:hover {
 /* TÍTULO */
 
 .Titulo {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../img/atardecer.jpg'); /* Negro */
+    background: url('../img/atardecer.jpg');
     background-size: cover;
     background-position: center;
     height: 350px;
@@ -77,13 +91,18 @@ nav a:hover {
 .Titulo h1 {
     color: var(--azul);
     font-size: 4em;
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.5); /* neutro oscuro */
+    text-shadow: 2px 2px 4px var(--blanco); 
     max-width: 600px;
+}
+
+Body {
+    background-color: var(--neutro);
+    color: var(--negro);
 }
 
 /* INTRODUCCIÓN */
 
-.Intro h3 {
+.Intro h2 {
     text-align: center;
     margin: 40px 0 20px;
     font-size: 1.8em;
@@ -107,7 +126,7 @@ nav a:hover {
     width: 100%;
     max-width: 450px;
     border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Poner negro*/
+    box-shadow: 5px 5px 15px var(--negro);
 }
 
 /* BLOQUE AYUDA*/
@@ -120,8 +139,8 @@ nav a:hover {
 }
 
 .btn-formulario {
-    background: linear-gradient(to right, var(--azul), var(--verde));
-    color: var(--neutro);
+    background: linear-gradient(to right, var(--azul-texto), var(--verde));
+    color: var(--blanco);
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
@@ -140,12 +159,12 @@ nav a:hover {
 
 .Estadistica-item {
     flex: 1;
-    border-right: 1px solid #999; /* Neutro oscuro */
+    border-right: 2px solid var(--azul);
 }
 
 .Estadistica-item:last-child { border-right: none; }
-.Estadistica-item i { font-size: 2em; color: var(--azul); }
-.Estadistica-item h2 { font-size: 2.5em; color: var(--azul); }
+.Estadistica-item i { font-size: 3em; color: var(--azul-texto); }
+.Estadistica-item h3 { font-size: 2.5em; color: var(--azul-texto); }
 
 /* BOTÓN CONSULTAR */
 
@@ -155,8 +174,8 @@ nav a:hover {
 }
 
 .btn-stats {
-    background: linear-gradient(to right, var(--azul), var(--verde));
-    color: var(--neutro);
+    background: linear-gradient(to right, var(--azul-texto), var(--verde));
+    color: var(--blanco);
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
@@ -170,9 +189,10 @@ nav a:hover {
     background-color: var(--verde);
     padding: 50px 10%;
     text-align: center;
+    color: var(--azul-texto);
 }
 
-.Animales h1 {
+.Animales h2 {
     font-size: 2.5em;
     margin-bottom: 30px;
 }
@@ -187,12 +207,13 @@ nav a:hover {
 }
 
 .Card-Info {
-    background-color: var(--gris-claro);
+    background-color: var(--neutro);
     padding: 20px;
     border-radius: 15px;
     flex: 1;
     max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* poner negro */
+    box-shadow: 0 4px 8px var(--negro);
+    color: var(--azul-texto);
 }
 
 .Card-Info i {
@@ -204,14 +225,14 @@ nav a:hover {
 /* BÚSQUEDA */
 
 .Barra-Busqueda {
-    background-color: var(--gris-claro);
+    background-color: var(--neutro);
     display: flex;
     align-items: center;
     padding: 8px 25px;
     border-radius: 35px;
     max-width: 900px;
     margin: 0 auto 50px; 
-    border: 1px solid var(--neutro);
+    border: 1px solid var(--negro);
 }
 
 .input-wrapper {
@@ -227,6 +248,7 @@ nav a:hover {
     font-family: inherit;
     font-size: 1em;
     outline: none;
+    color: var(--azul-texto);
 }
 
 .Barra-Busqueda select {
@@ -240,7 +262,7 @@ nav a:hover {
     border: none;
     cursor: pointer;
     font-size: 1.2em;
-    color: #666; /* neutro oscuro */
+    color: var(--azul-texto);
     margin-left: 5px;
 }
 
@@ -256,7 +278,7 @@ nav a:hover {
 .Animal-Card {
     background: var(--neutro);
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Poner negro */
+    box-shadow: 0 4px 12px var(--negro);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -269,9 +291,10 @@ nav a:hover {
 
 .Card-Imagen img {
     margin-top: 10px;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 15%;
 }
 
 /* SEXO */
@@ -286,12 +309,11 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--neutro);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Definir negro */
+    color: var(--neutro-texto);
 }
 
 .hembra { background: var(--rosa); } 
-.macho { background: #1e90ff; } /* Definir azul claro */
+.macho { background: var(--azul-claro); } 
 
 /* ATRIBUTOS TARJETA */
 
@@ -301,7 +323,7 @@ nav a:hover {
 }
 
 .Nombre-Animal {
-    color: var(--azul);
+    color: var(--azul-texto);
     font-size: 1.4em;
     margin-bottom: 15px;
     display: inline-block;
@@ -312,7 +334,7 @@ nav a:hover {
 .Atributos-Lista p {
     font-size: 0.95em;
     margin: 6px 0;
-    color: #333; /* Cambiar a neutro oscuro */
+    color: var(--azul-texto);
 }
 
 /* BOTONES */
@@ -334,8 +356,8 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(to right, var(--azul), var(--verde));
-    color: var(--neutro);
+    background: linear-gradient(to right, var(--azul-texto), var(--verde));
+    color: var(--blanco);
 }
 
 .btn-apadriname:hover, .btn-adoptar:hover {
@@ -346,23 +368,23 @@ nav a:hover {
 
 .Mapa {
     background-color: var(--azul); 
-    color: var(--neutro);
+    color: var(--neutro-texto);
     text-align: center;
-    padding-top: 20px;
+    padding-top: 2em;
 }
 
 .Foto-mapa img {
     width: 100%;
     max-height: 500px;
     object-fit: cover;
-    /* margin: 20px 0 0; */
+    margin: 2em 0 0;
 }
 
 /* FOOTER */
 
 footer {
     background-color: var(--azul);
-    color: var(--neutro);
+    color: var(--neutro-texto);
     text-align: center;
     padding: 20px;
     /* margin-top: 2em; */
@@ -374,7 +396,7 @@ footer {
 }
 
 footer a {
-    color: var(--neutro);
+    color: var(--neutro-texto);
     text-decoration: none;
     font-weight: bold;
     font-size: 1em;

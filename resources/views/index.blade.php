@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
     <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
     <script src="{{asset('js/cookies.js')}}"></script>
+    <script src="{{asset('js/darkmode.js')}}"></script>
     <!-- <script src="{{ asset('js/filtros.js') }}"></script> -->
     <title>Inicio</title>
 </head>
@@ -56,7 +57,7 @@
         </section>
 
         <section class="Intro">
-            <h3> ¿Quiénes somos? </h3>
+            <h2> ¿Quiénes somos? </h2>
             <div class="Sipnosis">
                 <div class="Sipnosis_izq">
                     <p>Somos un equipo apasionado de profesionales y voluntarios dedicados al rescate, rehabilitación y protección de animales en situación de vulnerabilidad. Ubicados en el corazón de Campano, Chiclana de la Frontera. Santuario de la Frontera nace no solo como un refugio físico, sino como un hogar donde cada especie recibe una segunda oportunidad. Creemos firmemente que cada animal merece vivir con dignidad, respeto y los cuidados veterinarios necesarios para su pleno desarrollo.</p>
@@ -65,7 +66,7 @@
                     <img src="{{asset('img/caballos.jpg')}}" alt="Lémur">
                 </div>
             </div>
-            <h3> Nuestra misión </h3>
+            <h2> Nuestra misión </h2>
             <div class="Mision">
                 <div class="Mision_izq">
                     <img src="{{asset('img/geco.jpg')}}" alt="Cocodrilo">
@@ -84,17 +85,17 @@
             </div>
             <div class="Estadisticas">
                 <div class="Estadistica-item">
-                    <i class="fas fa-paw"></i> <h2>150+</h2>
+                    <i class="fas fa-paw"></i> <h3>150+</h3>
                     <p>Animales protegidos</p>
                 </div>
 
                 <div class="Estadistica-item">
-                    <i class="fas fa-user"></i> <h2>50+</h2>
+                    <i class="fas fa-user"></i> <h3>50+</h3>
                     <p>Trabajadores voluntarios</p>
                 </div>
 
                 <div class="Estadistica-item">
-                    <i class="fas fa-shield-alt"></i> <h2>100000+</h2>
+                    <i class="fas fa-shield-alt"></i> <h3>100000+</h3>
                     <p>donaciones para mejorar su vida</p>
                 </div>
             </div>
@@ -104,7 +105,7 @@
         </section>
 
         <section class="Animales">
-            <h1>CONOCE A NUESTROS ANIMALES</h1>
+            <h2>CONOCE A NUESTROS ANIMALES</h2>
             
             <div class="Opciones">
                 <div class="Card-Info">
@@ -123,9 +124,9 @@
             <div class="Barra-Busqueda">
                 <div class="input-wrapper">
                     <i class="fas fa-search"></i>
-                    <p>Buscar por </p>
                 </div>
-                <select>
+                <label for="Buscar por">Buscar por</label>
+                <select name="Buscar por">
                     <option>Especie</option>
                     <option>Grupo</option>
                     <option>Nacimiento</option>
