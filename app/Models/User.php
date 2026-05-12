@@ -25,6 +25,8 @@ class User extends Authenticatable
         'password',
         'usuario',
         'cuenta_bancaria',
+        'telefono',
+        'mensaje',
         'es_trabaj',
     ];
 
