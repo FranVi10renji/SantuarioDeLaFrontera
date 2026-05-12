@@ -64,7 +64,7 @@ nav a:hover {
 /* TÍTULO */
 
 .Titulo {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../img/atardecer.jpg'); 
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../img/atardecer.jpg'); /* Negro */
     background-size: cover;
     background-position: center;
     height: 350px;
@@ -77,7 +77,7 @@ nav a:hover {
 .Titulo h1 {
     color: var(--azul);
     font-size: 4em;
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.5); /* neutro oscuro */
     max-width: 600px;
 }
 
@@ -107,7 +107,7 @@ nav a:hover {
     width: 100%;
     max-width: 450px;
     border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Poner negro*/
 }
 
 /* BLOQUE AYUDA*/
@@ -120,8 +120,8 @@ nav a:hover {
 }
 
 .btn-formulario {
-    background: linear-gradient(to right, #0A2E36, #7CE391);
-    color: white;
+    background: linear-gradient(to right, var(--azul), var(--verde));
+    color: var(--neutro);
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
@@ -140,7 +140,7 @@ nav a:hover {
 
 .Estadistica-item {
     flex: 1;
-    border-right: 1px solid #999;
+    border-right: 1px solid #999; /* Neutro oscuro */
 }
 
 .Estadistica-item:last-child { border-right: none; }
@@ -155,8 +155,8 @@ nav a:hover {
 }
 
 .btn-stats {
-    background: linear-gradient(to right, #0A2E36, #7CE391);
-    color: white;
+    background: linear-gradient(to right, var(--azul), var(--verde));
+    color: var(--neutro);
     border: none;
     padding: 12px 30px;
     border-radius: 25px;
@@ -192,7 +192,7 @@ nav a:hover {
     border-radius: 15px;
     flex: 1;
     max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* poner negro */
 }
 
 .Card-Info i {
@@ -211,7 +211,7 @@ nav a:hover {
     border-radius: 35px;
     max-width: 900px;
     margin: 0 auto 50px; 
-    border: 1px solid #ccc;
+    border: 1px solid var(--neutro);
 }
 
 .input-wrapper {
@@ -230,7 +230,7 @@ nav a:hover {
 }
 
 .Barra-Busqueda select {
-    border-left: 1px solid #ccc;
+    border-left: 1px solid var(--neutro);
     padding-left: 15px;
     cursor: pointer;
 }
@@ -240,7 +240,7 @@ nav a:hover {
     border: none;
     cursor: pointer;
     font-size: 1.2em;
-    color: #666;
+    color: #666; /* neutro oscuro */
     margin-left: 5px;
 }
 
@@ -254,9 +254,9 @@ nav a:hover {
 }
 
 .Animal-Card {
-    background: #fff;
+    background: var(--neutro);
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Poner negro */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -286,12 +286,12 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    color: var(--neutro);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Definir negro */
 }
 
-.hembra { background: #ff69b4; }
-.macho { background: #1e90ff; }
+.hembra { background: var(--rosa); } 
+.macho { background: #1e90ff; } /* Definir azul claro */
 
 /* ATRIBUTOS TARJETA */
 
@@ -312,7 +312,7 @@ nav a:hover {
 .Atributos-Lista p {
     font-size: 0.95em;
     margin: 6px 0;
-    color: #333;
+    color: #333; /* Cambiar a neutro oscuro */
 }
 
 /* BOTONES */
@@ -334,8 +334,8 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(to right, #0A2E36, #7CE391);
-    color: white;
+    background: linear-gradient(to right, var(--azul), var(--verde));
+    color: var(--neutro);
 }
 
 .btn-apadriname:hover, .btn-adoptar:hover {
@@ -346,7 +346,7 @@ nav a:hover {
 
 .Mapa {
     background-color: var(--azul); 
-    color: white;
+    color: var(--neutro);
     text-align: center;
     padding-top: 20px;
 }
@@ -355,30 +355,40 @@ nav a:hover {
     width: 100%;
     max-height: 500px;
     object-fit: cover;
-    margin: 20px 0 0;
+    /* margin: 20px 0 0; */
 }
 
 /* FOOTER */
 
-.Contacto-bar {
+footer {
     background-color: var(--azul);
     color: var(--neutro);
-    display: flex;
-    justify-content: space-evenly; 
-    align-items: center;           
+    text-align: center;
     padding: 20px;
-    gap: 15px;                     
+    /* margin-top: 2em; */
 }
 
-.contacto-item {
+.icon-box {
     display: flex;
-    align-items: center;           
-    gap: 10px;                     
-    font-weight: bold;
-    font-size: 0.9em;              
+    justify-content: space-between;
 }
 
-.contacto-item i {
-    font-size: 1.8em;              
+footer a {
     color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 1em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i {
+    font-size: 2em;
+}
+
+.bye {
+    margin-top: 1em;
 }

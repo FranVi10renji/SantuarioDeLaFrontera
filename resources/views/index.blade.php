@@ -10,6 +10,7 @@
     <meta name="author" content="Javier Alcoba Navero, Claudia García-Matarredona Urbano, Jesús Fernández Carreño, Marcos García Bravo">
     <meta name="robots" content="index, follow">
     <meta name="language" content="spanish">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +22,9 @@
         }
     </style>
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
+    <script src="{{asset('js/cookies.js')}}"></script>
+    <!-- <script src="{{ asset('js/filtros.js') }}"></script> -->
     <title>Inicio</title>
 </head>
 
@@ -202,35 +206,39 @@
             <div class="Foto-mapa">
                 <img src="{{asset('img/mapa.png')}}" alt="Ubicación del santuario">
             </div>
-            <footer class="Contacto-bar">
-                <div class="contacto-item">
-                    <i class="fab fa-instagram"></i>
-                    <span>santuariodelafra_official</span>
-                </div>
-
-                <div class="contacto-item">
-                    <i class="fab fa-tiktok"></i>
-                    <span>santuariodelafra_official</span>
-                </div>
-
-                <div class="contacto-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <span>+34 753 67 19 01</span>
-                </div>
-
-                <div class="contacto-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Chiclana (Cádiz, Andalucía)</span>
-                </div>
-
-                <div class="contacto-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>santuariofrontera@gmail.com</span>
-                </div>
-            </footer>
         </section>
     </main>
-    <script src="{{ asset('js/filtros.js') }}"></script>
+
+    <footer>
+        <div class="icon-box">
+            <a href="instagram.com"><i class="fa-brands fa-instagram"></i>santuariodelafra_official</a>
+            <a href="tiktok.com"><i class="fa-brands fa-tiktok"></i>santuariodelafra_official</a>
+            <a href="tel:+34928361901"><i class="fa-solid fa-phone"></i>+34 928 36 19 01</a>
+            <a href="https://www.google.com/maps/place/Campano,+11130+Chiclana+de+la+Frontera,+C%C3%A1diz/@36.3646405,-6.1404783,15.82z/data=!4m6!3m5!1s0xd0c341e1ebea4c9:0x8aa188072bec46a1!8m2!3d36.365938!4d-6.135735!16s%2Fg%2F11xdl5bwh?entry=ttu&g_ep=EgoyMDI2MDQyNi4wIKXMDSoASAFQAw%3D%3D"><i class="fa-solid fa-location-dot"></i>Chiclana (Cádiz, España)</a>
+            <a href="mailto:santuariofrontera@gmail.com"><i class="fa-solid fa-envelope"></i>santuariofrontera@gmail.com</a>
+        </div>
+        <hr>
+        <div class="bye">
+            <p>Copyright &copy; 2026 Santuario de la Frontera. Todos los derechos reservados.</p>
+            <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos García Bravo</p>
+        </div>
+    </footer>
+
+    @if(!request()->cookie('cookies_consent'))
+    <div class="cookie-banner">
+        <img src="{{asset('img/cookie.png')}}" alt="Cookie con forma de corazón">
+        <div class="cookie-msg">
+            <p>Usamos cookies para mejorar tu experiencia</p>
+            <p>Las cookies web son pequeños archivos de texto que los sitios web almacenan en el navegador del usuario para recordar información sobre su visita.</p>
+            Mejoran la experiencia de navegación al recordar accesos, preferencias y carritos de compra, aunque algunas rastrean hábitos para marketing.</p>
+            Se pueden gestionar desde la configuración del navegador. Santuario de la Frontera &copy no distribuye información personal a terceros ni asociados.</p>
+            <div class="caja-btn-cookies">
+                <button type="button" aria-label="aceptar" id="cookies-aceptar">ACEPTAR</button>
+                <button type="button" aria-label="rechazar" id="cookies-rechazar">RECHAZAR</button><br>
+            </div>
+        </div>
+    </div>
+    @endif
 </body>
 
 </html>
