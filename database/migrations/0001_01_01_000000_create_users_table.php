@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('usuario')->unique();
             $table->string('cuenta_bancaria')->nullable();
-            $table->integer('telefono', 9)->nullable();
+            $table->integer('telefono')->nullable();
             $table->string('mensaje', 200)->nullable();
             $table->boolean('es_trabaj')->default(false);
             $table->rememberToken();

@@ -1,0 +1,254 @@
+/* =========================================
+   1. CONFIGURACIÓN INICIAL Y VARIABLES
+   ========================================= */
+
+:root {
+    --azul: #0A2E36;
+    --verde: #82D382;
+    --rosa: #C687E3;
+    --neutro: #D9D9D9;
+    --neutro_oscuro: #222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* El dashboard en tu imagen tiene fondo blanco para que las tablas destaquen */
+    background-color: #FFFFFF;
+    color: var(--neutro_oscuro);
+}
+
+/* =========================================
+   2. HEADER Y NAVEGACIÓN
+   ========================================= */
+
+header {
+    background-color: var(--azul);
+    color: var(--neutro);
+    padding: 1em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3em;
+}
+
+nav img {
+    height: 2em;
+    cursor: pointer;
+}
+
+nav span {
+    display: none;
+}
+
+nav a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.fa-circle-half-stroke {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* =========================================
+   ESTILOS ESPECÍFICOS DEL DASHBOARD
+   (Tabla de Información General)
+   ========================================= */
+
+.admin-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.admin-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.admin-container h1 span {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+hr.divisor {
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    margin: 40px 0;
+}
+
+.info-general {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.info-general h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.tabla-estadisticas {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 2px solid var(--neutro_oscuro);
+    font-size: 16px;
+}
+
+.tabla-estadisticas td {
+    border: 1px solid var(--neutro_oscuro);
+    padding: 12px 30px;
+}
+
+.tabla-estadisticas td:first-child {
+    text-align: left;
+    font-weight: bold;
+}
+
+.tabla-estadisticas td.valor {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* =========================================
+   4. SECCIONES DE DATOS
+   ========================================= */
+
+.info-detallada {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.info-detallada h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.botones-accion {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.botones-accion button {
+    padding: 10px 25px;
+    border-radius: 25px;
+    /* Bordes redondeados de píldora */
+    border: none;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+}
+
+.btn-dark {
+    background-color: var(--azul);
+    /* Usa tu variable de azul oscuro */
+}
+
+.btn-danger {
+    background-color: #ff0000;
+}
+
+Ç.barra-opciones {
+    background-color: #d9d9d9;
+    /* Gris claro de tu diseño */
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.barra-opciones select,
+.barra-opciones input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--neutro_oscuro);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 5px;
+    outline: none;
+    font-weight: bold;
+}
+
+.barra-opciones input {
+    border: 2px solid var(--azul);
+    border-radius: 15px;
+    padding: 5px 15px;
+    background-color: #e0e0e0;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.tabla-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+}
+
+.tabla-datos th {
+    background-color: #d9d9d9;
+    padding: 12px;
+    border: 1px solid #000;
+    font-weight: bold;
+}
+
+.tabla-datos td {
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.td-icono {
+    font-size: 18px;
+}
+
+.icono-eliminar {
+    color: #ff0000;
+}
+
+.icono-editar {
+    color: var(--azul);
+}
+
+.barra-edicion {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}

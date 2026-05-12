@@ -25,12 +25,196 @@
 </head>
 
 <body>
-    <h1>Hola soy la página de Dashboard</h1>
-    <p>Completa mi HTML y dame estilo con CSS</p>
-    <small>(Puedes consultarme como soy en el Figma 🫣)</small>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{route('index')}}"><span>Logo</span><img src="{{asset('img/logo_2.png')}}" alt="Logo del santuario"></a>
+                </li>
+                <li>
+                    <a href="{{route('index')}}">INICIO</a>
+                </li>
+                <li>
+                    <a href="{{route('formulario')}}">FORMULARIO</a>
+                </li>
+                <li>
+                    <a href="{{route('dashboard')}}">DASHBOARD</a> <!--Esconder esto si no es admin-->
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-    <p>Puedo redirigirte a una página ya conectada en Laravel y HTML</p>
-    <a href="{{route('formulario')}}">FORMULARIO</a>
+    <link rel="stylesheet" href="{{ asset('css/admin-panel.css') }}">
+
+    <div class="admin-container">
+        <h1 class="text-center">Bienvenid@ al panel de administrador <br> <span>&lt;{{ $adminName }}&gt;</span></h1>
+        
+        <hr class="divisor">
+
+        <section class="info-general">
+            <h2>Información general</h2>
+            
+            <table class="tabla-estadisticas">
+                <tbody>
+                    <tr>
+                        <td>Animales totales en el santuario</td>
+                        <td class="valor">{{ $stats['animalesTotales'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Especie más presente</td>
+                        <td class="valor">{{ $stats['especieMasPresente'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Animal más donado</td>
+                        <td class="valor">{{ $stats['animalMasDonado'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Trabajadores totales</td>
+                        <td class="valor">{{ $stats['trabajadoresTotales'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cantidad más alta donada</td>
+                        <td class="valor">{{ $stats['cantidadMasAlta'] }} €</td>
+                    </tr>
+                    <tr>
+                        <td>Dinero total del santuario</td>
+                        <td class="valor">{{ $stats['dineroTotal'] }} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="info-detallada">
+            <h2>Información animal</h2>
+
+            <div class="botones-accion">
+                <button class="btn-dark">Mostrar todos los animales</button>
+
+                <form action="{{ route('dashboard.animal.ejemplo') }}" method="POST" style="display: inline-block;">
+                    @csrf <button type="submit" class="btn-dark">Añadir animal de ejemplo <i class="fa-solid fa-circle-plus"></i></button>
+                </form>
+
+                <button class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+            </div>
+
+            <div class="barra-opciones">
+                <label>Ordenar por:</label>
+                <select>
+                    <option>Especie</option>
+                    <option>Nombre</option>
+                    <option>Año</option>
+                </select>
+                <button class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+            </div>
+
+            <div class="tabla-responsive">
+                <table class="tabla-datos">
+                    <thead>
+                        <tr>
+                            <th>Nombre animal</th>
+                            <th>Grupo</th>
+                            <th>Especie</th>
+                            <th>Sexo</th>
+                            <th>Año nacimiento</th>
+                            <th>Tamaño</th>
+                            <th>Peso</th>
+                            <th>Castrado</th>
+                            <th>Alimentación</th>
+                            <th>ELIMINAR</th>
+                            <th>ACTUALIZAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($animales as $animal)
+                        <tr>
+                            <td>{{ $animal->nombre }}</td>
+                            <td>{{ $animal->grupo }}</td>
+                            <td>{{ $animal->especie }}</td>
+                            <td>{{ $animal->sexo }}</td>
+                            <td>{{ $animal->anno_nacimiento }}</td>
+                            <td>{{ $animal->tamaño }}</td>
+                            <td>{{ $animal->peso }}</td>
+                            <td>{{ $animal->castrado ? 'Sí' : 'No' }}</td>
+                            <td>{{ $animal->dieta }}</td>
+                            <td class="td-icono"><a href="#" class="icono-eliminar"><i class="fa-solid fa-trash-can"></i></a></td>
+                            <td class="td-icono"><a href="#" class="icono-editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="barra-opciones barra-edicion">
+                <label>Edita un campo:</label>
+                <select>
+                    <option>Especie</option>
+                    <option>Nombre</option>
+                </select>
+                <input type="text" placeholder="Nuevo valor">
+            </div>
+        </section>
+
+        <section class="info-detallada">
+            <h2>Información de personal</h2>
+
+            <div class="botones-accion">
+                <button class="btn-dark">Mostrar todos los trabajadores</button>
+                <form action="{{ route('dashboard.trabajador.ejemplo') }}" method="POST" style="display: inline-block;">
+                    @csrf <button type="submit" class="btn-dark">Añadir trabajador de ejemplo <i class="fa-solid fa-circle-plus"></i></button>
+                </form>
+                <button class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+            </div>
+
+            <div class="barra-opciones">
+                <label>Ordenar por:</label>
+                <select>
+                    <option>Apellidos</option>
+                    <option>Rol</option>
+                </select>
+                <button class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+            </div>
+
+            <div class="tabla-responsive">
+                <table class="tabla-datos">
+                    <thead>
+                        <tr>
+                            <th>Nombre trabaj.</th>
+                            <th>Apellidos</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Rol</th>
+                            <th>ELIMINAR</th>
+                            <th>ACTUALIZAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($trabajadores as $trabajador)
+                        <tr>
+                            <td>{{ $trabajador->nombre }}</td>
+                            <td>{{ $trabajador->apellido }}</td>
+                            <td>{{ $trabajador->email }}</td>
+                            <td>{{ $trabajador->telefono ?? 'null' }}</td>
+                            <td>{{ $trabajador->es_trabaj ? 'Admin/Voluntario' : 'Usuario' }}</td>
+                            <td class="td-icono"><a href="#" class="icono-eliminar"><i class="fa-solid fa-trash-can"></i></a></td>
+                            <td class="td-icono"><a href="#" class="icono-editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="barra-opciones barra-edicion">
+                <label>Edita un campo:</label>
+                <select>
+                    <option>Rol</option>
+                </select>
+                <input type="text" placeholder="Nuevo valor">
+            </div>
+        </section>
+    </div>
 </body>
 
 </html>

@@ -28,3 +28,7 @@ Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])-
 // Cookies
 Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
 Route::post('/rechazar-cookies', [CookieController::class, 'rechazar']);
+
+//Dashboard
+Route::post('/dashboard/animal-ejemplo', [App\Http\Controllers\DashboardController::class, 'crearAnimalEjemplo'])->name('dashboard.animal.ejemplo');
+Route::post('/dashboard/trabajador-ejemplo', [App\Http\Controllers\DashboardController::class, 'crearTrabajadorEjemplo'])->name('dashboard.trabajador.ejemplo');
