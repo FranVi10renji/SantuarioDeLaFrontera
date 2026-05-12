@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $adminName = Auth::check() ? Auth::user()->nombre : 'Administrador';
 
@@ -42,11 +42,41 @@ class DashboardController extends Controller
         $dineroTotal = DB::table('animal_user')->sum('cantidad') ?? 0;
 
         //TABLA
-        // Todos los animales
-        $animales = Animal::all();
+
+        // 1. Lógica para los Animales
+        $queryAnimales = Animal::query();
+
+        // ¿Han pedido ordenarlo?
+        if ($request->has('orden_animal')) {
+            $queryAnimales->orderBy($request->orden_animal, 'asc'); // asc = de la A a la Z, o menor a mayor
+        } else {
+            $queryAnimales->orderByDesc('id'); // Por defecto, los últimos añadidos
+        }
+
+        // ¿Han pedido mostrar todos?
+        if (!$request->has('todos_animales')) {
+            $queryAnimales->take(5); // Si no, limitamos a 5
+        }
+
+        $animales = $queryAnimales->get();
         
-        // Todos los trabajadores
-        $trabajadores = User::where('es_trabaj', true)->get();
+
+        // 2. Lógica para los Trabajadores
+        $queryTrabajadores = User::where('es_trabaj', true);
+
+        // ¿Han pedido ordenarlo?
+        if ($request->has('orden_trabajador')) {
+            $queryTrabajadores->orderBy($request->orden_trabajador, 'asc');
+        } else {
+            $queryTrabajadores->orderByDesc('id');
+        }
+
+        // ¿Han pedido mostrar todos?
+        if (!$request->has('todos_trabajadores')) {
+            $queryTrabajadores->take(5);
+        }
+
+        $trabajadores = $queryTrabajadores->get();
 
         return view('dashboard', [
             'adminName' => $adminName,
@@ -96,6 +126,64 @@ class DashboardController extends Controller
         $trabajador->es_trabaj = true;
         
         $trabajador->save();
+
+        return back();
+    }
+
+    public function eliminarAnimal($id)
+    {
+        $animal = Animal::findOrFail($id);
+        $animal->delete();
+
+        return back();
+    }
+
+    public function eliminarTrabajador($id)
+    {
+        $trabajador = User::findOrFail($id);
+        $trabajador->delete();
+
+        return back();
+    }
+
+    public function actualizarAnimal(Request $request)
+    {
+        $animal = Animal::findOrFail($request->animal_id);
+        
+        $campo = $request->campo;
+        $valor = $request->valor;
+
+        $animal->$campo = $valor;
+        $animal->save();
+
+        return back();
+    }
+
+    public function actualizarTrabajador(Request $request)
+    {
+        $trabajador = User::findOrFail($request->trabajador_id);
+        
+        $campo = $request->campo;
+        $valor = $request->valor;
+
+        $trabajador->$campo = $valor;
+        $trabajador->save();
+
+        return back();
+    }
+
+    public function eliminarTodosAnimales()
+    {
+        Animal::query()->delete();
+
+        return back();
+    }
+
+    public function eliminarTodosTrabajadores()
+    {
+        User::where('es_trabaj', true)
+            ->where('id', '!=', Auth::id())
+            ->delete();
 
         return back();
     }

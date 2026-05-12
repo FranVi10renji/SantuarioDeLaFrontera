@@ -92,24 +92,43 @@
                 <h2>Información animal</h2>
 
                 <div class="botones-accion">
-                    <button class="btn-dark">Mostrar todos los animales</button>
+
+                    @if(request()->has('todos_animales'))
+                        <a href="{{ request()->fullUrlWithoutQuery(['todos_animales']) }}" class="btn-dark">
+                            Mostrar menos animales
+                        </a>
+                    @else
+                        <a href="{{ request()->fullUrlWithQuery(['todos_animales' => 1]) }}" class="btn-dark">
+                            Mostrar todos los animales
+                        </a>
+                    @endif
 
                     <form action="{{ route('dashboard.animal.ejemplo') }}" method="POST" style="display: inline-block;">
                         @csrf <button type="submit" class="btn-dark">Añadir animal de ejemplo <i class="fa-solid fa-circle-plus"></i></button>
                     </form>
 
-                    <button class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+                    <form action="{{ route('dashboard.animales.eliminar_todo') }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¡PELIGRO! ¿Estás absolutamente seguro de que quieres eliminar TODOS los animales? Esta acción no se puede deshacer.');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+                    </form>
                 </div>
 
-                <div class="barra-opciones">
+                <form action="{{ request()->url() }}" method="GET" class="barra-opciones">
+                    @if(request()->has('todos_animales'))
+                        <input type="hidden" name="todos_animales" value="1">
+                    @endif
+
                     <label>Ordenar por:</label>
-                    <select>
-                        <option>Especie</option>
-                        <option>Nombre</option>
-                        <option>Año</option>
+                    <select name="orden_animal">
+                        <option value="nombre" {{ request('orden_animal') == 'nombre' ? 'selected' : '' }}>Nombre</option>
+                        <option value="especie" {{ request('orden_animal') == 'especie' ? 'selected' : '' }}>Especie</option>
+                        <option value="anno_nacimiento" {{ request('orden_animal') == 'anno_nacimiento' ? 'selected' : '' }}>Año de nacimiento</option>
+                        <option value="tamaño" {{ request('orden_animal') == 'tamaño' ? 'selected' : '' }}>Tamaño</option>
+                        <option value="peso" {{ request('orden_animal') == 'peso' ? 'selected' : '' }}>Peso</option>
                     </select>
-                    <button class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
-                </div>
+                    <button type="submit" class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+                </form>
 
                 <div class="tabla-responsive">
                     <table class="tabla-datos">
@@ -140,43 +159,95 @@
                                 <td>{{ $animal->peso }}</td>
                                 <td>{{ $animal->castrado ? 'Sí' : 'No' }}</td>
                                 <td>{{ $animal->dieta }}</td>
-                                <td class="td-icono"><a href="#" class="icono-eliminar"><i class="fa-solid fa-trash-can"></i></a></td>
-                                <td class="td-icono"><a href="#" class="icono-editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+
+                                <td class="td-icono">
+                                    <form action="{{ route('dashboard.animal.eliminar', $animal->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar a {{ $animal->nombre }}?');">
+                                        @csrf
+                                        @method('DELETE') <!-- Laravel requiere esto para peticiones tipo DELETE -->
+                                        <button type="submit" class="icono-eliminar" style="background: none; border: none; padding: 0; cursor: pointer; font-size: inherit;">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td class="td-icono">
+                                    <button type="button" class="icono-editar" onclick="seleccionarAnimal({{ $animal->id }}, '{{ $animal->nombre }}')" style="background: none; border: none; cursor: pointer; font-size: inherit;">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
 
-                <div class="barra-opciones barra-edicion">
-                    <label>Edita un campo:</label>
-                    <select>
-                        <option>Especie</option>
-                        <option>Nombre</option>
+                <form action="{{ route('dashboard.animal.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-animal" style="display: none; transition: 0.3s;">
+                    @csrf
+                    @method('PUT')
+                    
+                    <input type="hidden" name="animal_id" id="edit_animal_id">
+
+                    <label>Editando a: <strong id="edit_animal_nombre" style="color: var(--azul);">Nadie</strong></label>
+                    
+                    <label style="margin-left: 15px;">Campo:</label>
+                    <select name="campo" id="edit_animal_campo" onchange="cambiarInputAnimal()">
+                        <option value="nombre">Nombre</option>
+                        <option value="especie">Especie</option>
+                        <option value="grupo">Grupo</option>
+                        <option value="sexo">Sexo</option>
+                        <option value="anno_nacimiento">Año de nacimiento</option>
+                        <option value="tamaño">Tamaño</option>
+                        <option value="peso">Peso</option>
+                        <option value="castrado">Castrado</option>
+                        <option value="dieta">Alimentación</option>
                     </select>
-                    <input type="text" placeholder="Nuevo valor">
-                </div>
+
+                    <div id="contenedor_valor_animal" style="display: inline-block;">
+                        <input type="text" name="valor" id="edit_animal_valor" placeholder="Nuevo valor" required>
+                    </div>
+
+                    <button type="submit" class="btn-dark" style="padding: 5px 15px; margin-left: 10px;">Guardar <i class="fa-solid fa-check"></i></button>
+                </form>
             </section>
 
             <section class="info-detallada">
                 <h2>Información de personal</h2>
 
                 <div class="botones-accion">
-                    <button class="btn-dark">Mostrar todos los trabajadores</button>
+
+                    @if(request()->has('todos_trabajadores'))
+                        <a href="{{ request()->fullUrlWithoutQuery(['todos_trabajadores']) }}" class="btn-dark">
+                            Mostrar menos trabajadores
+                        </a>
+                    @else
+                        <a href="{{ request()->fullUrlWithQuery(['todos_trabajadores' => 1]) }}" class="btn-dark">
+                            Mostrar todos los trabajadores
+                        </a>
+                    @endif
+
                     <form action="{{ route('dashboard.trabajador.ejemplo') }}" method="POST" style="display: inline-block;">
                         @csrf <button type="submit" class="btn-dark">Añadir trabajador de ejemplo <i class="fa-solid fa-circle-plus"></i></button>
                     </form>
-                    <button class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+                    
+                    <form action="{{ route('dashboard.trabajadores.eliminar_todo') }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¡PELIGRO! ¿Estás seguro de que quieres eliminar a TODOS los trabajadores? (Tranquilo, tu cuenta actual está protegida y no se borrará).');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-danger"><i class="fa-solid fa-triangle-exclamation"></i> Eliminar todo <i class="fa-solid fa-triangle-exclamation"></i></button>
+                    </form>
                 </div>
 
-                <div class="barra-opciones">
+                <form action="{{ request()->url() }}" method="GET" class="barra-opciones">
+                    @if(request()->has('todos_trabajadores'))
+                        <input type="hidden" name="todos_trabajadores" value="1">
+                    @endif
+
                     <label>Ordenar por:</label>
-                    <select>
-                        <option>Apellidos</option>
-                        <option>Rol</option>
+                    <select name="orden_trabajador">
+                        <option value="nombre" {{ request('orden_trabajador') == 'nombre' ? 'selected' : '' }}>Nombre</option>
+                        <option value="apellido" {{ request('orden_trabajador') == 'apellido' ? 'selected' : '' }}>Apellido</option>
                     </select>
-                    <button class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
-                </div>
+                    <button type="submit" class="btn-icon"><i class="fa-solid fa-arrow-down-z-a"></i></button>
+                </form>
 
                 <div class="tabla-responsive">
                     <table class="tabla-datos">
@@ -199,21 +270,51 @@
                                 <td>{{ $trabajador->email }}</td>
                                 <td>{{ $trabajador->telefono ?? 'null' }}</td>
                                 <td>{{ $trabajador->es_trabaj ? 'Admin/Voluntario' : 'Usuario' }}</td>
-                                <td class="td-icono"><a href="#" class="icono-eliminar"><i class="fa-solid fa-trash-can"></i></a></td>
-                                <td class="td-icono"><a href="#" class="icono-editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+
+                                <td class="td-icono">
+                                    <form action="{{ route('dashboard.trabajador.eliminar', $trabajador->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar al trabajador {{ $trabajador->nombre }}?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="icono-eliminar" style="background: none; border: none; padding: 0; cursor: pointer; font-size: inherit;">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td class="td-icono">
+                                    <button type="button" class="icono-editar" onclick="seleccionarTrabajador({{ $trabajador->id }}, '{{ $trabajador->nombre }} {{ $trabajador->apellido }}')" style="background: none; border: none; cursor: pointer; font-size: inherit;">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
 
-                <div class="barra-opciones barra-edicion">
-                    <label>Edita un campo:</label>
-                    <select>
-                        <option>Rol</option>
+                <form action="{{ route('dashboard.trabajador.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-trabajador" style="display: none; transition: 0.3s;">
+                    @csrf
+                    @method('PUT')
+                    
+                    <input type="hidden" name="trabajador_id" id="edit_trabajador_id">
+
+                    <label>Editando a: <strong id="edit_trabajador_nombre" style="color: var(--azul);">Nadie</strong></label>
+                    
+                    <label style="margin-left: 15px;">Campo:</label>
+                    <select name="campo" id="edit_trabajador_campo" onchange="cambiarInputTrabajador()">
+                        <option value="nombre">Nombre</option>
+                        <option value="apellido">Apellidos</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono</option>
+                        <option value="es_trabaj">Rol (Trabajador)</option>
                     </select>
-                    <input type="text" placeholder="Nuevo valor">
-                </div>
+
+                    <div id="contenedor_valor_trabajador" style="display: inline-block;">
+                        <input type="text" name="valor" id="edit_trabajador_valor" placeholder="Nuevo valor" required>
+                    </div>
+
+                    <button type="submit" class="btn-dark" style="padding: 5px 15px; margin-left: 10px;">Guardar <i class="fa-solid fa-check"></i></button>
+                </form>
             </section>
         </div>
     </main>
@@ -247,6 +348,106 @@
         </div>
     </div>
     @endif
-</body>
 
+    <script>
+        //script para la edicion de animales, con dos partes:
+        // 1. Cuando hacen clic en el lápiz con animal
+        function seleccionarAnimal(id, nombre) {
+            document.getElementById('form-editar-animal').style.display = 'inline-flex';
+            
+            document.getElementById('edit_animal_id').value = id;
+            document.getElementById('edit_animal_nombre').innerText = nombre;
+            
+            cambiarInputAnimal();
+        }
+
+        // 2. Lógica para animal
+        function cambiarInputAnimal() {
+            const campo = document.getElementById('edit_animal_campo').value;
+            const contenedor = document.getElementById('contenedor_valor_animal');
+            let html = '';
+
+            if (campo === 'sexo') {
+                html = `<select name="valor" required>
+                            <option value="H">Hembra</option>
+                            <option value="M">Macho</option>
+                        </select>`;
+            } else if (campo === 'castrado') {
+                html = `<select name="valor" required>
+                            <option value="1">Sí (1)</option>
+                            <option value="0">No (0)</option>
+                        </select>`;
+            } else if (campo === 'grupo') {
+                 html = `<select name="valor" required>
+                            <option value="Mamífero">Mamífero</option>
+                            <option value="Ave">Ave</option>
+                            <option value="Reptil">Reptil</option>
+                            <option value="Anfibio">Anfibio</option>
+                        </select>`;
+            } else if (campo === 'dieta') {
+                 html = `<select name="valor" required>
+                            <option value="Carnívoro">Carnívoro</option>
+                            <option value="Herbívoro">Herbívoro</option>
+                            <option value="Omnívoro">Omnívoro</option>
+                        </select>`;
+            } 
+            else if (campo === 'anno_nacimiento' || campo === 'tamaño' || campo === 'peso') {
+                html = `<input type="number" step="0.01" name="valor" placeholder="Valor numérico" required>`;
+            } 
+            else {
+                html = `<input type="text" name="valor" placeholder="Nuevo valor" required>`;
+            }
+
+            contenedor.innerHTML = html;
+        }
+
+        //3. Cuando hacen clic en el lápiz del trabajador
+        function seleccionarTrabajador(id, nombreCompleto) {
+            document.getElementById('form-editar-trabajador').style.display = 'inline-flex';
+            document.getElementById('edit_trabajador_id').value = id;
+            document.getElementById('edit_trabajador_nombre').innerText = nombreCompleto;
+            cambiarInputTrabajador();
+        }
+
+        //4. Lógica para trabajador
+        function cambiarInputTrabajador() {
+            const campo = document.getElementById('edit_trabajador_campo').value;
+            const contenedor = document.getElementById('contenedor_valor_trabajador');
+            let html = '';
+
+            if (campo === 'es_trabaj') {
+                html = `<select name="valor" required>
+                            <option value="1">Admin / Voluntario (Sí)</option>
+                            <option value="0">Usuario normal (No)</option>
+                        </select>`;
+            } 
+            else if (campo === 'email') {
+                html = `<input type="email" name="valor" placeholder="correo@ejemplo.com" required>`;
+            } else if (campo === 'telefono') {
+                html = `<input type="tel" name="valor" placeholder="Ej: 600123456" required>`;
+            } 
+            else {
+                html = `<input type="text" name="valor" placeholder="Nuevo valor" required>`;
+            }
+
+            contenedor.innerHTML = html;
+        }
+    </script>
+
+    <script>
+        //Script para mantener la posición de scroll al actualizar la página o hacer una acción
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) {
+                window.scrollTo(0, scrollpos);
+                localStorage.removeItem('scrollpos');
+            }
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
+
+</body>
 </html>

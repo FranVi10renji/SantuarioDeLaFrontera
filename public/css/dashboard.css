@@ -24,7 +24,7 @@ body {
     color: var(--neutro_oscuro);
 }
 
-body.dark-mode{
+body.dark-mode {
     --azul-bg: #071e23;
     --azul-txt: #d9d9d9;
     --verde: #315631;
@@ -165,16 +165,21 @@ hr.divisor {
     flex-wrap: wrap;
 }
 
-.botones-accion button {
+.botones-accion button,
+.botones-accion a,
+.barra-edicion button {
     padding: 10px 25px;
     border-radius: 25px;
-    /* Bordes redondeados de píldora */
     border: none;
     font-weight: bold;
     font-family: inherit;
     cursor: pointer;
     font-size: 14px;
-    color: var(--neutro);
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-dark {
@@ -209,7 +214,7 @@ hr.divisor {
     color: var(--neutro_oscuro);
 }
 
-.barra-opciones i{
+.barra-opciones i {
     color: var(--neutro_oscuro);
 }
 
