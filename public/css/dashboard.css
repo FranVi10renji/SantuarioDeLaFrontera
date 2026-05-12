@@ -3,11 +3,14 @@
    ========================================= */
 
 :root {
-    --azul: #0A2E36;
+    --azul-bg: #0A2E36;
+    --azul-txt: #0A2E36;
     --verde: #82D382;
     --rosa: #C687E3;
     --neutro: #D9D9D9;
+    --neutro-bg: #d9d9d9;
     --neutro_oscuro: #222;
+    --rojo: #A80000;
 }
 
 * {
@@ -17,9 +20,18 @@
 }
 
 body {
-    /* El dashboard en tu imagen tiene fondo blanco para que las tablas destaquen */
-    background-color: #FFFFFF;
+    background-color: var(--neutro-bg);
     color: var(--neutro_oscuro);
+}
+
+body.dark-mode{
+    --azul-bg: #071e23;
+    --azul-txt: #d9d9d9;
+    --verde: #315631;
+    --neutro: #d9d9d9;
+    --neutro-bg: #222;
+    --neutro_oscuro: #d9d9d9;
+    --rojo: #A80000;
 }
 
 /* =========================================
@@ -27,7 +39,7 @@ body {
    ========================================= */
 
 header {
-    background-color: var(--azul);
+    background-color: var(--azul-bg);
     color: var(--neutro);
     padding: 1em;
 }
@@ -93,7 +105,7 @@ nav a:hover {
 
 hr.divisor {
     border: none;
-    border-top: 2px solid #e0e0e0;
+    border-top: 2px solid var(--neutro);
     margin: 40px 0;
 }
 
@@ -162,21 +174,19 @@ hr.divisor {
     font-family: inherit;
     cursor: pointer;
     font-size: 14px;
-    color: white;
+    color: var(--neutro);
 }
 
 .btn-dark {
-    background-color: var(--azul);
-    /* Usa tu variable de azul oscuro */
+    background-color: var(--azul-bg);
 }
 
 .btn-danger {
-    background-color: #ff0000;
+    background-color: var(--rojo);
 }
 
-Ç.barra-opciones {
-    background-color: #d9d9d9;
-    /* Gris claro de tu diseño */
+.barra-opciones {
+    background-color: var(--neutro-bg);
     display: inline-flex;
     align-items: center;
     gap: 15px;
@@ -196,13 +206,18 @@ hr.divisor {
     padding: 5px;
     outline: none;
     font-weight: bold;
+    color: var(--neutro_oscuro);
+}
+
+.barra-opciones i{
+    color: var(--neutro_oscuro);
 }
 
 .barra-opciones input {
-    border: 2px solid var(--azul);
+    border: 2px solid var(--azul-bg);
     border-radius: 15px;
     padding: 5px 15px;
-    background-color: #e0e0e0;
+    background-color: var(--neutro-bg);
 }
 
 .btn-icon {
@@ -222,18 +237,19 @@ hr.divisor {
     border-collapse: collapse;
     font-size: 14px;
     text-align: center;
+    background-color: var(--neutro-bg);
 }
 
 .tabla-datos th {
-    background-color: #d9d9d9;
+    background-color: var(--neutro-bg);
     padding: 12px;
-    border: 1px solid #000;
+    border: 1px solid var(--neutro_oscuro);
     font-weight: bold;
 }
 
 .tabla-datos td {
     padding: 10px;
-    border: 1px solid #000;
+    border: 1px solid var(--neutro_oscuro);
 }
 
 .td-icono {
@@ -241,14 +257,49 @@ hr.divisor {
 }
 
 .icono-eliminar {
-    color: #ff0000;
+    color: var(--rojo);
 }
 
 .icono-editar {
-    color: var(--azul);
+    color: var(--azul-txt);
 }
 
 .barra-edicion {
     margin-top: 20px;
     margin-bottom: 60px;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: var(--azul-bg);
+    color: var(--neutro);
+    text-align: center;
+    padding: 20px;
+    margin-top: 2em;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 1em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i {
+    font-size: 2em;
+}
+
+.bye {
+    margin-top: 1em;
 }

@@ -25,7 +25,7 @@ body {
 
 body.dark-mode{
     --azul: #071e23;
-    --azul-texto: #12748a;
+    --azul-texto: #1CAACA;
     --azul-claro: #0e5398;
     --verde: #315631;
     --rosa: #981659;
@@ -159,7 +159,7 @@ Body {
 
 .Estadistica-item {
     flex: 1;
-    border-right: 2px solid var(--azul);
+    border-right: 2px solid var(--azul-texto);
 }
 
 .Estadistica-item:last-child { border-right: none; }
@@ -286,15 +286,14 @@ Body {
 
 .Card-Imagen {
     position: relative;
-    height: 200px;
 }
 
 .Card-Imagen img {
-    margin-top: 10px;
-    width: 50%;
+    width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 15%;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 /* SEXO */
