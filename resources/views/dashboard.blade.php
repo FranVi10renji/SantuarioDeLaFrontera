@@ -95,13 +95,13 @@
                 <div class="botones-accion">
 
                     @if(request()->has('todos_animales'))
-                        <a href="{{ request()->fullUrlWithoutQuery(['todos_animales']) }}" class="btn-dark">
-                            Mostrar menos animales
-                        </a>
+                    <a href="{{ request()->fullUrlWithoutQuery(['todos_animales']) }}" class="btn-dark">
+                        Mostrar menos animales
+                    </a>
                     @else
-                        <a href="{{ request()->fullUrlWithQuery(['todos_animales' => 1]) }}" class="btn-dark">
-                            Mostrar todos los animales
-                        </a>
+                    <a href="{{ request()->fullUrlWithQuery(['todos_animales' => 1]) }}" class="btn-dark">
+                        Mostrar todos los animales
+                    </a>
                     @endif
 
                     <form action="{{ route('dashboard.animal.ejemplo') }}" method="POST" style="display: inline-block;">
@@ -117,7 +117,7 @@
 
                 <form action="{{ request()->url() }}" method="GET" class="barra-opciones">
                     @if(request()->has('todos_animales'))
-                        <input type="hidden" name="todos_animales" value="1">
+                    <input type="hidden" name="todos_animales" value="1">
                     @endif
 
                     <input type="hidden" name="dir_animal" value="{{ request('dir_animal', 'asc') == 'asc' ? 'desc' : 'asc' }}">
@@ -126,16 +126,16 @@
                     <select name="orden_animal">
                         <option value="nombre" {{ request('orden_animal') == 'nombre' ? 'selected' : '' }}>Nombre</option>
                         <option value="especie" {{ request('orden_animal') == 'especie' ? 'selected' : '' }}>Especie</option>
-                        <option value="anno_nacimiento" {{ request('orden_animal') == 'anno_nacimiento' ? 'selected' : '' }}>Año de nacimiento</option>
+                        <option value="nacimiento" {{ request('orden_animal') == 'nacimiento' ? 'selected' : '' }}>Año de nacimiento</option>
                         <option value="tamaño" {{ request('orden_animal') == 'tamaño' ? 'selected' : '' }}>Tamaño</option>
                         <option value="peso" {{ request('orden_animal') == 'peso' ? 'selected' : '' }}>Peso</option>
                     </select>
-                    
+
                     <button type="submit" class="btn-icon">
                         @if(request('dir_animal', 'asc') == 'asc')
-                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                        <i class="fa-solid fa-arrow-down-a-z"></i>
                         @else
-                            <i class="fa-solid fa-arrow-down-z-a"></i>
+                        <i class="fa-solid fa-arrow-down-z-a"></i>
                         @endif
                     </button>
                 </form>
@@ -164,11 +164,11 @@
                                 <td>{{ $animal->grupo }}</td>
                                 <td>{{ $animal->especie }}</td>
                                 <td>{{ $animal->sexo }}</td>
-                                <td>{{ $animal->anno_nacimiento }}</td>
+                                <td>{{ $animal->nacimiento }}</td>
                                 <td>{{ $animal->tamaño }}</td>
                                 <td>{{ $animal->peso }}</td>
                                 <td>{{ $animal->castrado ? 'Sí' : 'No' }}</td>
-                                <td>{{ $animal->dieta }}</td>
+                                <td>{{ $animal->alimentacion }}</td>
 
                                 <td class="td-icono">
                                     <form action="{{ route('dashboard.animal.eliminar', $animal->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar a {{ $animal->nombre }}?');">
@@ -194,22 +194,22 @@
                 <form action="{{ route('dashboard.animal.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-animal" style="display: none; transition: 0.3s;">
                     @csrf
                     @method('PUT')
-                    
+
                     <input type="hidden" name="animal_id" id="edit_animal_id">
 
                     <label>Editando a: <strong id="edit_animal_nombre" style="color: var(--azul);">Nadie</strong></label>
-                    
+
                     <label style="margin-left: 15px;">Campo:</label>
                     <select name="campo" id="edit_animal_campo" onchange="cambiarInputAnimal()">
                         <option value="nombre">Nombre</option>
                         <option value="especie">Especie</option>
                         <option value="grupo">Grupo</option>
                         <option value="sexo">Sexo</option>
-                        <option value="anno_nacimiento">Año de nacimiento</option>
+                        <option value="nacimiento">Año de nacimiento</option>
                         <option value="tamaño">Tamaño</option>
                         <option value="peso">Peso</option>
                         <option value="castrado">Castrado</option>
-                        <option value="dieta">Alimentación</option>
+                        <option value="alimentacion">Alimentación</option>
                     </select>
 
                     <div id="contenedor_valor_animal" style="display: inline-block;">
@@ -226,19 +226,19 @@
                 <div class="botones-accion">
 
                     @if(request()->has('todos_trabajadores'))
-                        <a href="{{ request()->fullUrlWithoutQuery(['todos_trabajadores']) }}" class="btn-dark">
-                            Mostrar menos trabajadores
-                        </a>
+                    <a href="{{ request()->fullUrlWithoutQuery(['todos_trabajadores']) }}" class="btn-dark">
+                        Mostrar menos trabajadores
+                    </a>
                     @else
-                        <a href="{{ request()->fullUrlWithQuery(['todos_trabajadores' => 1]) }}" class="btn-dark">
-                            Mostrar todos los trabajadores
-                        </a>
+                    <a href="{{ request()->fullUrlWithQuery(['todos_trabajadores' => 1]) }}" class="btn-dark">
+                        Mostrar todos los trabajadores
+                    </a>
                     @endif
 
                     <form action="{{ route('dashboard.trabajador.ejemplo') }}" method="POST" style="display: inline-block;">
                         @csrf <button type="submit" class="btn-dark">Añadir trabajador de ejemplo <i class="fa-solid fa-circle-plus"></i></button>
                     </form>
-                    
+
                     <form action="{{ route('dashboard.trabajadores.eliminar_todo') }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¡PELIGRO! ¿Estás seguro de que quieres eliminar a TODOS los trabajadores? (Tranquilo, tu cuenta actual está protegida y no se borrará).');">
                         @csrf
                         @method('DELETE')
@@ -248,7 +248,7 @@
 
                 <form action="{{ request()->url() }}" method="GET" class="barra-opciones">
                     @if(request()->has('todos_trabajadores'))
-                        <input type="hidden" name="todos_trabajadores" value="1">
+                    <input type="hidden" name="todos_trabajadores" value="1">
                     @endif
 
                     <input type="hidden" name="dir_trabajador" value="{{ request('dir_trabajador', 'asc') == 'asc' ? 'desc' : 'asc' }}">
@@ -258,12 +258,12 @@
                         <option value="nombre" {{ request('orden_trabajador') == 'nombre' ? 'selected' : '' }}>Nombre</option>
                         <option value="apellido" {{ request('orden_trabajador') == 'apellido' ? 'selected' : '' }}>Apellido</option>
                     </select>
-                    
+
                     <button type="submit" class="btn-icon">
                         @if(request('dir_trabajador', 'asc') == 'asc')
-                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                        <i class="fa-solid fa-arrow-down-a-z"></i>
                         @else
-                            <i class="fa-solid fa-arrow-down-z-a"></i>
+                        <i class="fa-solid fa-arrow-down-z-a"></i>
                         @endif
                     </button>
                 </form>
@@ -314,11 +314,11 @@
                 <form action="{{ route('dashboard.trabajador.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-trabajador" style="display: none; transition: 0.3s;">
                     @csrf
                     @method('PUT')
-                    
+
                     <input type="hidden" name="trabajador_id" id="edit_trabajador_id">
 
                     <label>Editando a: <strong id="edit_trabajador_nombre" style="color: var(--azul);">Nadie</strong></label>
-                    
+
                     <label style="margin-left: 15px;">Campo:</label>
                     <select name="campo" id="edit_trabajador_campo" onchange="cambiarInputTrabajador()">
                         <option value="nombre">Nombre</option>
@@ -335,21 +335,21 @@
                     <button type="submit" class="btn-dark" style="padding: 5px 15px; margin-left: 10px;">Guardar <i class="fa-solid fa-check"></i></button>
                 </form>
             </section>
-            
+
             <h1 style="text-align: center; margin-top: 100px; margin-bottom: 60px;">Estadísticas del Santuario</h1>
 
             <div style="width: 80%; margin: 0 auto; padding: 20px; background: transparent; margin-bottom: 30px;">
-                <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Atributos de los Animales</h3> 
+                <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Atributos de los Animales</h3>
                 <canvas id="chartAtributos" height="80"></canvas>
             </div>
 
             <div style="display: flex; justify-content: space-around; width: 90%; margin: 0 auto 50px auto; gap: 20px;">
                 <div style="width: 45%; padding: 20px; background: transparent;">
-                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Clasificación por sexo</h3> 
+                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Clasificación por sexo</h3>
                     <canvas id="chartSexo"></canvas>
                 </div>
                 <div style="width: 45%; padding: 20px; background: transparent;">
-                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Tipos de animales</h3> 
+                    <h3 style="text-align: center; color: #555; margin-bottom: 30px;">Tipos de animales</h3>
                     <canvas id="chartEspecies"></canvas>
                 </div>
             </div>
@@ -391,10 +391,10 @@
         //Cuando hacen clic en el lápiz con animal
         function seleccionarAnimal(id, nombre) {
             document.getElementById('form-editar-animal').style.display = 'inline-flex';
-            
+
             document.getElementById('edit_animal_id').value = id;
             document.getElementById('edit_animal_nombre').innerText = nombre;
-            
+
             cambiarInputAnimal();
         }
 
@@ -415,23 +415,22 @@
                             <option value="0">No (0)</option>
                         </select>`;
             } else if (campo === 'grupo') {
-                 html = `<select name="valor" required>
+                html = `<select name="valor" required>
                             <option value="Mamífero">Mamífero</option>
                             <option value="Ave">Ave</option>
                             <option value="Reptil">Reptil</option>
                             <option value="Anfibio">Anfibio</option>
                         </select>`;
-            } else if (campo === 'dieta') {
-                 html = `<select name="valor" required>
+            } else if (campo === 'alimentacion') {
+                html = `<select name="valor" required>
                             <option value="Carnívoro">Carnívoro</option>
                             <option value="Herbívoro">Herbívoro</option>
                             <option value="Omnívoro">Omnívoro</option>
+                            <option value="Insectívoro">Insectívoro</option>
                         </select>`;
-            } 
-            else if (campo === 'anno_nacimiento' || campo === 'tamaño' || campo === 'peso') {
+            } else if (campo === 'nacimiento' || campo === 'tamaño' || campo === 'peso') {
                 html = `<input type="number" step="0.01" name="valor" placeholder="Valor numérico" required>`;
-            } 
-            else {
+            } else {
                 html = `<input type="text" name="valor" placeholder="Nuevo valor" required>`;
             }
 
@@ -457,13 +456,11 @@
                             <option value="1">Trabajador (Sí)</option>
                             <option value="0">Usuario normal (No)</option>
                         </select>`;
-            } 
-            else if (campo === 'email') {
+            } else if (campo === 'email') {
                 html = `<input type="email" name="valor" placeholder="correo@ejemplo.com" required>`;
             } else if (campo === 'telefono') {
                 html = `<input type="tel" name="valor" placeholder="Ej: 600123456" required>`;
-            } 
-            else {
+            } else {
                 html = `<input type="text" name="valor" placeholder="Nuevo valor" required>`;
             }
 
@@ -473,7 +470,7 @@
 
     <script>
         //Script para mantener la posición de scroll al actualizar la página o hacer una acción
-        document.addEventListener("DOMContentLoaded", function(event) { 
+        document.addEventListener("DOMContentLoaded", function(event) {
             var scrollpos = localStorage.getItem('scrollpos');
             if (scrollpos) {
                 window.scrollTo(0, scrollpos);
@@ -499,15 +496,23 @@
                 labels: Object.keys(datosRasgos),
                 datasets: [{
                     label: 'Cantidad',
-                    data: Object.values(datosRasgos), 
-                    backgroundColor: '#8b7cf6', 
+                    data: Object.values(datosRasgos),
+                    backgroundColor: '#8b7cf6',
                     borderRadius: 20,
                     borderSkipped: false
                 }]
             },
             options: {
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { display: false } }
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
 
@@ -524,7 +529,9 @@
             },
             options: {
                 plugins: {
-                    legend: { position: 'bottom' }
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
             }
         });
@@ -542,11 +549,14 @@
             },
             options: {
                 plugins: {
-                    legend: { position: 'bottom' } 
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
             }
         });
     </script>
 
 </body>
+
 </html>

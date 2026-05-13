@@ -26,15 +26,10 @@ class FormularioController extends Controller
         ]);
 
         // Promocionar usuario a trabajador actualizando atributo en BD
-        User::create([
-            'nombre' => $request->nombre,
-            'apellidos' => $request->apellidos,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'mensaje' => $request->mensaje,
-            // Creo que hay que ponerle un numerito como que ahora el user se promociona a voluntario
-            'es_trabaj' => 1, // No sé exactamente si era (0 user; 1 trabajador; 2 admin) ???
-        ]);
+        $trabajador = User::findOrFail($request->trabajador_id);
+
+        $trabajador->es_trabaj = true;
+        $trabajador->save();
 
         return back()->with('success', 'Datos enviados correctamente');
     }
@@ -46,18 +41,29 @@ class FormularioController extends Controller
             'grupo' => 'required|string',
             'especie' => 'required|string',
             'nacimiento' => 'required|integer|min:1970|max:2026',
-            'sexo' => 'required|in:macho,hembra',
+            'sexo' => 'required|in:M,H',
             'tamaño' => 'required|numeric',
             'peso' => 'required|numeric',
-            'castrado' => 'required|in:si,no',
+            'castrado' => 'required|in:0,1',
             'alimentacion' => 'required|string',
             'imagen' => 'nullable|image',
         ]);
 
         // Procesamiento de img
         $rutaImagen = null;
-        if ($request->hasFile('imagen'))
-            $rutaImagen = $request->file('imagen')->store('img/animals', 'public');
+        if ($request->hasFile('imagen')) 
+        {
+            $imagen = $request->file('imagen');
+
+            // Nombre único
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+
+            // Mover archivo
+            $imagen->move(public_path('img/animals'), $nombreImagen);
+
+            // Guardar ruta en BD si quieres
+            $rutaImagen = 'img/animals/' . $nombreImagen;
+        }
 
         // Checkboxes
         $atributos = $request->atributos ? implode(',', $request->atributos) : null;

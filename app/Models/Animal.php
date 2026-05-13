@@ -23,7 +23,7 @@ class Animal extends Model
     ];
 
     protected $casts = [
-        'rasgos' => 'array',
+        'atributos' => 'array',
         'castrado' => 'boolean',
     ];
 

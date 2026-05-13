@@ -135,9 +135,9 @@
                                         <label for="sexo">Sexo (*):</label><br>
                                         <div class="opciones">
                                             <label for="sexo">Macho:</label>
-                                            <input type="radio" aria-label="sexo del animal" name="sexo" value="macho" required>
+                                            <input type="radio" aria-label="sexo del animal" name="sexo" value="M" required>
                                             <label for="sexo">Hembra:</label>
-                                            <input type="radio" aria-label="sexo del animal" name="sexo" value="hembra">
+                                            <input type="radio" aria-label="sexo del animal" name="sexo" value="H">
                                         </div>
                                     </div>
                                     <div class="labelinput">
@@ -154,19 +154,19 @@
                                         <label for="castrado">Castrado (*):</label>
                                         <div class="opciones">
                                             <label for="castrado">Sí:</label>
-                                            <input type="radio" aria-label="el animal está castrado" name="castrado" value="si" required>
+                                            <input type="radio" aria-label="el animal está castrado" name="castrado" value="1" required>
                                             <label for="castrado">No:</label>
-                                            <input type="radio" aria-label="el animal está castrado" name="castrado" value="no">
+                                            <input type="radio" aria-label="el animal está castrado" name="castrado" value="0">
                                         </div>
                                     </div>
                                     <div class="labelinput">
                                         <label for="alimentacion">Alimentación (*):</label>
                                         <select name="alimentacion" id="alimentacion" aria-label="alimentación del animal" required>
                                             <option value="">Selecciona su alimentación</option>
-                                            <option value="carnívoro">Carnívoro</option>
-                                            <option value="herbívoro">Herbívoro</option>
-                                            <option value="omnivoro">Omnívoro</option>
-                                            <option value="insectivoro">Insectívoro</option>
+                                            <option value="Carnívoro">Carnívoro</option>
+                                            <option value="Herbívoro">Herbívoro</option>
+                                            <option value="Omnivoro">Omnívoro</option>
+                                            <option value="Insectivoro">Insectívoro</option>
                                         </select><br>
                                     </div>
                                 </div>

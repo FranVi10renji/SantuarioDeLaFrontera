@@ -80,8 +80,8 @@ class DashboardController extends Controller
             ->toArray();
 
         //Gráfica atributos
-        $graficaRasgos = Animal::whereNotNull('rasgos')
-            ->pluck('rasgos')
+        $graficaRasgos = Animal::whereNotNull('atributos')
+            ->pluck('atributos')
             ->flatten()
             ->countBy()
             ->sortDesc()
@@ -112,13 +112,13 @@ class DashboardController extends Controller
         $animal->nombre = 'Melocotón ' . rand(1, 100); 
         $animal->grupo = 'Mamífero';
         $animal->especie = 'Perro';
-        $animal->rasgos = ['Amigable', 'Juguetón', 'Glotón'];
+        $animal->atributos = ['sociable', 'territorial'];
         $animal->sexo = 'M';
-        $animal->anno_nacimiento = 2004;
+        $animal->nacimiento = 2004;
         $animal->tamaño = 1.54;
         $animal->peso = 12.98;
         $animal->castrado = false;
-        $animal->dieta = 'Carnívoro';
+        $animal->alimentacion = 'Carnívoro';
         
         $animal->save();
 
@@ -130,11 +130,11 @@ class DashboardController extends Controller
         $numero = rand(1, 10000);
         
         $trabajador = new \App\Models\User();
-        $trabajador->nombre = 'José Fidel';
-        $trabajador->apellido = 'Argudo Argudo';
-        $trabajador->email = "josepro{$numero}@gmail.com";
+        $trabajador->nombre = 'Francisco Javier';
+        $trabajador->apellido = 'Rosa Vega';
+        $trabajador->email = "Javirosi{$numero}@gmail.com";
         $trabajador->password = bcrypt('12345678');
-        $trabajador->usuario = "josefidel_{$numero}";
+        $trabajador->usuario = "javiiirsaV{$numero}";
         $trabajador->telefono = '567392201';
         $trabajador->es_trabaj = true;
         
@@ -143,7 +143,7 @@ class DashboardController extends Controller
         return back();
     }
 
-    public function eliminarAnimal($id)
+    public function eliminarAnimal(int $id)
     {
         $animal = Animal::findOrFail($id);
         $animal->delete();
@@ -151,7 +151,7 @@ class DashboardController extends Controller
         return back();
     }
 
-    public function eliminarTrabajador($id)
+    public function eliminarTrabajador(int $id)
     {
         $trabajador = User::findOrFail($id);
         $trabajador->delete();
