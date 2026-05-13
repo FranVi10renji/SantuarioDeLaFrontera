@@ -28,3 +28,8 @@ Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])-
 // Cookies
 Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
 Route::post('/rechazar-cookies', [CookieController::class, 'rechazar']);
+
+//Login y registros
+Route::get('/register', [UserController::class, 'registrar']);
+Route::get('/login', [UserController::class, 'loguear']);
+Route::post('/login', [UserController::class, 'verificardatos'])->name('verificardatos');
