@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('especie', 100);
-            $table->json('atributos');
+            $table->json('atributos')->nullable();
             $table->integer('nacimiento')->unsigned();
             $table->string('sexo', 1);
             $table->float('peso')->unsigned();

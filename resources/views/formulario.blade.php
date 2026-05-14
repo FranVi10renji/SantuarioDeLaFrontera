@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
     <script src="{{asset('js/cookies.js')}}"></script>
     <script src="{{asset('js/darkmode.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Formulario</title>
 </head>
 
@@ -142,13 +143,13 @@
                                     </div>
                                     <div class="labelinput">
                                         <label for="tamaño">Tamaño (en m) (*):</label>
-                                        <input type="number" id="tamaño" aria-label="tamaño del animal en metros" name="tamaño" min="0.01" step="0.01" placeholder="2.67" required><br>
+                                        <input type="number" id="tamaño" aria-label="tamaño del animal en metros" name="tamaño" min="0.01" max="10" step="0.01" placeholder="2.67" required><br>
                                     </div>
                                 </div>
                                 <div class="rowlabelinput">
                                     <div class="labelinput">
                                         <label for="peso">Peso estimado (en kg) (*)</label>
-                                        <input type="number" id="peso" aria-label="peso del animal estimado en kilos" name="peso" min="0.01" step="0.01" placeholder="10.02" required>
+                                        <input type="number" id="peso" aria-label="peso del animal estimado en kilos" name="peso" min="0.01" max="50" step="0.01" placeholder="10.02" required>
                                     </div>
                                     <div class="rowlabelinput radios">
                                         <label for="castrado">Castrado (*):</label>
@@ -165,7 +166,7 @@
                                             <option value="">Selecciona su alimentación</option>
                                             <option value="Carnívoro">Carnívoro</option>
                                             <option value="Herbívoro">Herbívoro</option>
-                                            <option value="Omnivoro">Omnívoro</option>
+                                            <option value="Omnívoro">Omnívoro</option>
                                             <option value="Insectivoro">Insectívoro</option>
                                         </select><br>
                                     </div>
@@ -270,6 +271,22 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            toast: true,
+            color: '#0A2E36',
+            background: '#2b9a2b', 
+            position: 'top-end',
+            icon: 'success',
+            title: 'Operación realizada correctamente',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
     @endif
 </body>
 
