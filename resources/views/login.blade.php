@@ -134,17 +134,32 @@
     <img src="{{ asset('img/logo_2.png') }}" alt="Logo" class="logo-perro">
 
     <div class="login-card">
-        <form action="{{ route('index') }}" method="GET"> <h1>Santuario de la Frontera</h1>
+        <form action="{{ route('verificarLogin') }}" method="POST">
+            @csrf <h1>Santuario de la Frontera</h1>
             <div class="welcome-text">¡Bienvenido!</div>
+
+            @if($errors->any())
+                <div style="background-color: rgba(255, 0, 0, 0.2); 
+                            color: #8b0000; 
+                            padding: 10px; 
+                            border-radius: 15px; 
+                            margin-bottom: 20px; 
+                            border: 1px solid rgba(255, 0, 0, 0.3);
+                            font-size: 14px;
+                            font-weight: bold;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> 
+                    {{ $errors->first() }}
+                </div>
+            @endif
 
             <div class="input-group">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" placeholder="Nombre de Usuario" required>
+                <input type="text" name="usuario" placeholder="Nombre de Usuario" required>
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" placeholder="Contraseña" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
                 <i class="fa-solid fa-eye" style="left: auto; right: 15px; cursor: pointer;"></i>
             </div>
 
@@ -160,7 +175,7 @@
             </div>
 
             <div class="register-link">
-                ¿No tienes cuenta? <a href="{{ route('formulario') }}">Regístrate aquí</a>
+                ¿No tienes cuenta? <a href="{{ url('/register') }}">Regístrate aquí</a>
             </div>
         </form>
     </div>

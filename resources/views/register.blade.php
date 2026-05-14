@@ -118,38 +118,56 @@
     <img src="{{ asset('img/logo_2.png') }}" alt="Logo" class="logo-perro">
 
     <div class="register-card">
-        <form action="{{ route('verificardatos') }}" method="POST">
+        <form action="{{ route('verificarRegistro') }}" method="POST">
             @csrf <h1>SANTUARIO DE LA FRONTERA</h1>
             <span class="subtitle">Crea tu cuenta de voluntario</span>
 
             <div class="input-group">
                 <i class="fa-solid fa-user"></i>
                 <input type="text" name="nombre" placeholder="Nombre" required>
+                @error('nombre')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" name="apellidos" placeholder="Apellidos" required>
+                <input type="text" name="apellido" placeholder="Apellidos" required>
+                @error('apellido')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-at"></i>
                 <input type="email" name="email" placeholder="Correo electrónico" required>
+                @error('email')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-user-tag"></i>
                 <input type="text" name="usuario" placeholder="Nombre de usuario" required>
+                @error('usuario')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="password" placeholder="Contraseña" required>
+                @error('password')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="input-group">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="password_confirmation" placeholder="Confirmar contraseña" required>
+                @error('password_confirmation')
+                    <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn-register">

@@ -30,6 +30,7 @@ Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
 Route::post('/rechazar-cookies', [CookieController::class, 'rechazar']);
 
 //Login y registros
-Route::get('/register', [UserController::class, 'registrar']);
-Route::get('/login', [UserController::class, 'loguear']);
-Route::post('/login', [UserController::class, 'verificardatos'])->name('verificardatos');
+Route::get('/register', [UserController::class, 'formularioRegistro'])->name('formularioRegistro');
+Route::get('/login', [UserController::class, 'formularioLogin'])->name('formularioLogin');
+Route::post('/register', [UserController::class, 'verificarRegistro'])->name('verificarRegistro');
+Route::post('/login', [UserController::class, 'verificarLogin'])->name('verificarLogin');
