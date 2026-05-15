@@ -50,19 +50,23 @@ class FormularioController extends Controller
             'atributos' => 'nullable|array' 
         ]);
 
+        // $rutaImagen = null;
+        // if ($request->hasFile('imagen')) 
+        // {
+        //     $imagen = $request->file('imagen');
+
+        //     // Nombre único
+        //     $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+
+        //     // Mover archivo
+        //     $imagen->move(public_path('img/animals'), $nombreImagen);
+
+        //     // Guardar ruta en BD si quieres
+        //     $rutaImagen = 'img/animals/' . $nombreImagen;
+        // }
         $rutaImagen = null;
-        if ($request->hasFile('imagen')) 
-        {
-            $imagen = $request->file('imagen');
-
-            // Nombre único
-            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
-
-            // Mover archivo
-            $imagen->move(public_path('img/animals'), $nombreImagen);
-
-            // Guardar ruta en BD si quieres
-            $rutaImagen = 'img/animals/' . $nombreImagen;
+        if ($request->hasFile('imagen')) {
+            $rutaImagen = $request->file('imagen')->store('img/animals', 'public');
         }
 
         // $sexoAbreviado = ($request->sexo == 'hembra') ? 'h' : 'm';

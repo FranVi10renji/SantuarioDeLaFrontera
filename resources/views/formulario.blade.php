@@ -116,10 +116,10 @@
                                         <label for="grupo">Grupo (*):</label>
                                         <select name="grupo" id="grupo" aria-label="grupo al que pertenece el animal" required>
                                             <option value="">Selecciona un grupo</option>
-                                            <option value="mamífero">Mamífero</option>
-                                            <option value="ave">Ave</option>
-                                            <option value="reptil">Reptil</option>
-                                            <option value="anfibio">Anfibio</option>
+                                            <option value="Mamífero">Mamífero</option>
+                                            <option value="Ave">Ave</option>
+                                            <option value="Reptil">Reptil</option>
+                                            <option value="Anfibio">Anfibio</option>
                                         </select>
                                     </div>
                                     <div class="labelinput">
@@ -164,10 +164,10 @@
                                         <label for="alimentacion">Alimentación (*):</label>
                                         <select name="alimentacion" id="alimentacion" aria-label="alimentación del animal" required>
                                             <option value="">Selecciona su alimentación</option>
-                                            <option value="carnívoro">Carnívoro</option>
-                                            <option value="herbívoro">Herbívoro</option>
-                                            <option value="omnivoro">Omnívoro</option>
-                                            <option value="insectivoro">Insectívoro</option>
+                                            <option value="Carnívoro">Carnívoro</option>
+                                            <option value="Herbívoro">Herbívoro</option>
+                                            <option value="Omnivoro">Omnívoro</option>
+                                            <option value="Insectivoro">Insectívoro</option>
                                         </select><br>
                                     </div>
                                 </div>

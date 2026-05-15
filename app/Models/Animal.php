@@ -23,8 +23,8 @@ class Animal extends Model
     ];
 
     protected $casts = [
-        'atributos' => 'array',
         'castrado' => 'boolean',
+        'rasgos' => 'array'
     ];
 
     public function donantes()

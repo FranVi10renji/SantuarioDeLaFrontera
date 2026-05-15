@@ -79,9 +79,10 @@ class DashboardController extends Controller
             ->toArray();
 
         //Gráfica atributos
-        $graficaRasgos = Animal::whereNotNull('atributos')
-            ->pluck('atributos')
-            ->flatten()
+        $graficaRasgos = Animal::whereNotNull('rasgos')
+            ->get()
+            ->pluck('rasgos')
+            ->collapse()
             ->countBy()
             ->sortDesc()
             ->take(7) 
@@ -111,13 +112,13 @@ class DashboardController extends Controller
         $animal->nombre = 'Melocotón ' . rand(1, 100); 
         $animal->grupo = 'Mamífero';
         $animal->especie = 'Perro';
-        $animal->atributos = ['sociable', 'territorial'];
+        $animal->rasgos = ['sociable', 'territorial'];
         $animal->sexo = 'M';
-        $animal->nacimiento = 2004;
+        $animal->anno_nacimiento = 2004;
         $animal->tamaño = 1.54;
         $animal->peso = 12.98;
         $animal->castrado = false;
-        $animal->alimentacion = 'Carnívoro';
+        $animal->dieta = 'Carnívoro';
         
         $animal->save();
 

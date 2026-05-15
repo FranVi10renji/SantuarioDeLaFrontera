@@ -164,11 +164,11 @@
                                 <td>{{ $animal->grupo }}</td>
                                 <td>{{ $animal->especie }}</td>
                                 <td>{{ $animal->sexo }}</td>
-                                <td>{{ $animal->nacimiento }}</td>
+                                <td>{{ $animal->anno_nacimiento }}</td>
                                 <td>{{ $animal->tamaño }}</td>
                                 <td>{{ $animal->peso }}</td>
                                 <td>{{ $animal->castrado ? 'Sí' : 'No' }}</td>
-                                <td>{{ $animal->alimentacion }}</td>
+                                <td>{{ $animal->dieta }}</td>
 
                                 <td class="td-icono">
                                     <form action="{{ route('dashboard.animal.eliminar', $animal->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar a {{ $animal->nombre }}?');">
@@ -210,6 +210,7 @@
                         <option value="peso">Peso</option>
                         <option value="castrado">Castrado</option>
                         <option value="alimentacion">Alimentación</option>
+                        <option value="imagen">Imagen</option>
                     </select>
 
                     <div id="contenedor_valor_animal" style="display: inline-block;">
@@ -430,6 +431,8 @@
                         </select>`;
             } else if (campo === 'nacimiento' || campo === 'tamaño' || campo === 'peso') {
                 html = `<input type="number" step="0.01" name="valor" placeholder="Valor numérico" required>`;
+            } else if (campo === 'imagen'){
+                html = `<input type="file" name="valor" id="imagen" accept="image/*" required>`;
             } else {
                 html = `<input type="text" name="valor" placeholder="Nuevo valor" required>`;
             }
