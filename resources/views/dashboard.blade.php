@@ -23,7 +23,7 @@
     </style>
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('css/cookies.css')}}">
-    <script src="{{asset('js/cookies.js')}}"></script>
+    <!-- <script src="{{asset('js/cookies.js')}}"></script> -->
     <script src="{{asset('js/darkmode.js')}}"></script>
     <title>Dashboard</title>
 </head>
@@ -355,7 +355,7 @@
             </div>
         </div>
     </main>
-    <footer>
+    <!-- <footer>
         <div class="icon-box">
             <a href="instagram.com"><i class="fa-brands fa-instagram"></i>santuariodelafra_official</a>
             <a href="tiktok.com"><i class="fa-brands fa-tiktok"></i>santuariodelafra_official</a>
@@ -368,9 +368,9 @@
             <p>Copyright &copy; 2026 Santuario de la Frontera. Todos los derechos reservados.</p>
             <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos García Bravo</p>
         </div>
-    </footer>
+    </footer> -->
 
-    @if(!request()->cookie('cookies_consent'))
+    <!-- @if(!request()->cookie('cookies_consent'))
     <div class="cookie-banner">
         <img src="{{asset('img/cookie.png')}}" alt="Cookie con forma de corazón">
         <div class="cookie-msg">
@@ -384,7 +384,7 @@
             </div>
         </div>
     </div>
-    @endif
+    @endif -->
 
     <script>
         //script para la edicion de animales

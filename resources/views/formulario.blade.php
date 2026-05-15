@@ -164,10 +164,10 @@
                                         <label for="alimentacion">Alimentación (*):</label>
                                         <select name="alimentacion" id="alimentacion" aria-label="alimentación del animal" required>
                                             <option value="">Selecciona su alimentación</option>
-                                            <option value="Carnívoro">Carnívoro</option>
-                                            <option value="Herbívoro">Herbívoro</option>
-                                            <option value="Omnívoro">Omnívoro</option>
-                                            <option value="Insectivoro">Insectívoro</option>
+                                            <option value="carnívoro">Carnívoro</option>
+                                            <option value="herbívoro">Herbívoro</option>
+                                            <option value="omnivoro">Omnívoro</option>
+                                            <option value="insectivoro">Insectívoro</option>
                                         </select><br>
                                     </div>
                                 </div>
