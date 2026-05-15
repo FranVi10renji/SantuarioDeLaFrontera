@@ -11,6 +11,7 @@
     <meta name="author" content="Javier Alcoba Navero, Claudia García-Matarredona Urbano, Jesús Fernández Carreño, Marcos García Bravo">
     <meta name="robots" content="index, follow">
     <meta name="language" content="spanish">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,7 +192,7 @@
                     </table>
                 </div>
 
-                <form action="{{ route('dashboard.animal.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-animal" style="display: none; transition: 0.3s;">
+                <form action="{{ route('dashboard.animal.actualizar') }}" method="POST" class="barra-opciones barra-edicion" id="form-editar-animal" enctype="multipart/form-data" style="display: none; transition: 0.3s;">
                     @csrf
                     @method('PUT')
 

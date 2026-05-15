@@ -162,11 +162,17 @@ class DashboardController extends Controller
     public function actualizarAnimal(Request $request)
     {
         $animal = Animal::findOrFail($request->animal_id);
-        
         $campo = $request->campo;
         $valor = $request->valor;
 
-        $animal->$campo = $valor;
+        // Si el campo que llega es 'imagen', tratamos el $valor como un archivo
+        if ($campo === 'imagen' && $request->hasFile('valor')) {
+            $animal->imagen = $request->file('valor')->store('img/animals', 'public');
+        } else {
+            // Para cualquier otro campo (nombre, especie, etc.)
+            $animal->$campo = $valor;
+        }
+
         $animal->save();
 
         return back();
