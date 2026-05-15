@@ -121,21 +121,29 @@
                 </div>
             </div>
 
-            <div class="Barra-Busqueda">
-                <div class="input-wrapper">
-                    <i class="fas fa-search"></i>
+            <form action="{{ request()->url() }}" method="GET" class="barra-opciones" style="display: flex; align-items: center; gap: 10px;">
+                <input type="hidden" name="dir_animal" value="{{ request('dir_animal', 'asc') == 'asc' ? 'desc' : 'asc' }}">
+
+                <div class="Barra-Busqueda">
+                    
+                    <label style="margin-right: 10px; font-weight: bold;">Ordenar por:</label>
+                    
+                    {{-- Select con los nombres reales de tu base de datos --}}
+                    <select name="orden_animal" style="border: none; background: transparent; font-weight: bold; outline: none; cursor: pointer;">
+                        <option value="nombre" {{ request('orden_animal') == 'nombre' ? 'selected' : '' }}>Nombre</option>
+                        <option value="especie" {{ request('orden_animal') == 'especie' ? 'selected' : '' }}>Especie</option>
+                        <option value="grupo" {{ request('orden_animal') == 'grupo' ? 'selected' : '' }}>Grupo</option>
+                        <option value="anno_nacimiento" {{ request('orden_animal') == 'anno_nacimiento' ? 'selected' : '' }}>Nacimiento</option>
+                        <option value="sexo" {{ request('orden_animal') == 'sexo' ? 'selected' : '' }}>Sexo</option>
+                        <option value="tamano" {{ request('orden_animal') == 'tamano' ? 'selected' : '' }}>Tamaño</option>
+                        <option value="dieta" {{ request('orden_animal') == 'dieta' ? 'selected' : '' }}>Alimentación</option>
+                    </select>
+
+                    <button type="submit" style="border: none; background: transparent; cursor: pointer; margin-left: 15px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-search" style="color: #333;"></i>
+                    </button>
                 </div>
-                <label for="Buscar por">Buscar por</label>
-                <select name="Buscar por">
-                    <option>Especie</option>
-                    <option>Grupo</option>
-                    <option>Nacimiento</option>
-                    <option>Sexo</option>
-                    <option>Tamaño</option>
-                    <option>Alimentación</option>                    
-                </select>
-                <button class="btn-reset"><i class="fas fa-sync-alt"></i></button>
-            </div>
+            </form>
 
             <div class="Grid-Animales">
                 @foreach ($animales as $animal)
