@@ -9,12 +9,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        // 1. Cogemos todos los animales de la base de datos
-        // $animales = Animal::all(); 
-
-        // 2. Enviamos la variable a la vista 'index'
-        // return view('index', compact('animales'));
-
-        return view("index");
+        $animales = Animal::paginate(9); 
+    
+        return view('index', compact('animales'));
     }
 }

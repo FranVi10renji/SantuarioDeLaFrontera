@@ -138,14 +138,19 @@
             </div>
 
             <div class="Grid-Animales">
-                {{-- @foreach ($animales as $animal) --}}
+                @foreach ($animales as $animal)
                     <div class="Animal-Card">
                         <!--Versión dinámica-->
-                        {{-- <div class="Card-Imagen">
-                            <img src="{{ asset('img/animals/' . $animal->imagen) }}" alt="{{ $animal->nombre }}">
-                            
-                            <span class="Icono-Sexo {{ strtolower($animal->sexo) == 'h' ? 'hembra' : 'macho' }}">
-                                <i class="fas fa-{{ strtolower($animal->sexo) == 'h' ? 'venus' : 'mars' }}"></i>
+                         <div class="Card-Imagen">
+                            @if (empty($animal->imagen) || !file_exists(public_path('storage/' . $animal->imagen)))
+                                <img src="{{ asset('img/animals/default-animal.png') }}" alt="Imagen por defecto">
+                            @else
+                                <img src="{{ asset('storage/' . $animal->imagen) }}" alt="{{ $animal->nombre }}">
+                            @endif
+
+                            @php $esHembra = strtolower($animal->sexo) == 'h'; @endphp                            
+                            <span class="Icono-Sexo {{ $esHembra ? 'hembra' : 'macho' }}">
+                                <i class="fas fa-{{ $esHembra ? 'venus' : 'mars' }}"></i>
                             </span>
                         </div>
 
@@ -155,29 +160,9 @@
                             <div class="Atributos-Lista">
                                 <p><strong>Especie:</strong> {{ $animal->especie }}</p>
                                 <p><strong>Grupo:</strong> {{ $animal->grupo }}</p>
-                                <p><strong>Año de nacimiento:</strong> {{ $animal->nacimiento }}</p>
+                                <p><strong>Año de nacimiento:</strong> {{ $animal->anno_nacimiento }}</p>
                                 <p><strong>Peso:</strong> {{ $animal->peso }} kg</p>
                                 <p><strong>Tamaño:</strong> {{ $animal->tamaño }}</p>
-                            </div> --}}
-
-                        <!-- Versión estática -->
-                        <div class="Card-Imagen">
-                            <img src="img/animals/default-animal.png" alt="Nombre del animal">
-                            
-                            <span class="Icono-Sexo hembra">
-                                <i class="fas fa-venus"></i>
-                            </span>
-                        </div>
-
-                        <div class="Card-Detalles">
-                            <h3 class="Nombre-Animal">NOMBRE</h3>
-                            
-                            <div class="Atributos-Lista">
-                                <p><strong>Especie:</strong> Default</p>
-                                <p><strong>Grupo:</strong> Default</p>
-                                <p><strong>Año de nacimiento:</strong> Default</p>
-                                <p><strong>Peso:</strong> Default kg</p>
-                                <p><strong>Tamaño:</strong> Default</p>
                             </div>
 
                             <div class="Botones-Grupo">
@@ -187,13 +172,16 @@
                                     $adoptables = ['perro', 'gato', 'conejo'];
                                 @endphp
                                 
-                                @if(in_array(strtolower('perro'), $adoptables))
+                                @if(in_array(strtolower($animal->especie), $adoptables))
                                     <button class="btn-adoptar">ADÓPTAME <i class="fas fa-heart"></i></button>
                                 @endif
                             </div>
                         </div>
                     </div>
-                {{-- @endforeach --}}
+                @endforeach
+            </div>
+            <div class="Paginacion-Contenedor">
+                {{ $animales->links('vendor.pagination.simple-default') }}
             </div>
         </section>
 
@@ -240,6 +228,21 @@
         </div>
     </div>
     @endif
+
+    <script>
+        //Script para mantener la posición de scroll al actualizar la página o hacer una acción
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) {
+                window.scrollTo(0, scrollpos);
+                localStorage.removeItem('scrollpos');
+            }
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
 </body>
 
 </html>
