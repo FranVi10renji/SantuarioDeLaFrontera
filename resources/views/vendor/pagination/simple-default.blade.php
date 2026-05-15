@@ -3,17 +3,17 @@
         {{-- Bloque de botones superiores --}}
         <div class="Paginacion-Botones">
             @if ($paginator->onFirstPage())
-                <p class="btn-pag-disabled">&laquo; Previous</p>
+                <p class="btn-pag-disabled">&laquo; Anterior</p>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="btn-pag-link" rel="prev">&laquo; Previous</a>
+                <a href="{{ $paginator->previousPageUrl() }}" class="btn-pag-link" rel="prev">&laquo; Anterior</a>
             @endif
 
             <div class="Separador-Vacio"></div>
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="btn-pag-link" rel="next">Next &raquo;</a>
+                <a href="{{ $paginator->nextPageUrl() }}" class="btn-pag-link" rel="next">Siguiente &raquo;</a>
             @else
-                <p class="btn-pag-disabled">Next &raquo;</p>
+                <p class="btn-pag-disabled">Siguiente &raquo;</p>
             @endif
         </div>
 
