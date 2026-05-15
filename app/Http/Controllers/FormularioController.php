@@ -47,9 +47,9 @@ class FormularioController extends Controller
             'castrado' => 'required|in:0,1',
             'alimentacion' => 'required|string',
             'imagen' => 'nullable|image',
+            'atributos' => 'nullable|array' 
         ]);
 
-        // Procesamiento de img
         $rutaImagen = null;
         if ($request->hasFile('imagen')) 
         {
@@ -65,22 +65,20 @@ class FormularioController extends Controller
             $rutaImagen = 'img/animals/' . $nombreImagen;
         }
 
-        // Checkboxes
-        $atributos = $request->atributos ? implode(',', $request->atributos) : null;
+        // $sexoAbreviado = ($request->sexo == 'hembra') ? 'h' : 'm';
 
-        // Subir a la BD
         Animal::create([
-            'nombre' => $request->nombre,
-            'grupo' => $request->grupo,
-            'especie' => $request->especie,
-            'nacimiento' => $request->nacimiento,
-            'sexo' => $request->sexo,
-            'tamaño' => $request->tamaño,
-            'peso' => $request->peso,
-            'castrado' => $request->castrado,
-            'alimentacion' => $request->alimentacion,
-            'imagen' => $rutaImagen,
-            'atributos' => $atributos,
+            'nombre'          => $request->nombre,
+            'grupo'           => $request->grupo,
+            'especie'         => $request->especie,
+            'anno_nacimiento' => $request->nacimiento, 
+            'sexo'            => $request->sexo,
+            'tamaño'          => $request->tamaño,
+            'peso'            => $request->peso,
+            'castrado'        => $request->castrado == 'si' ? 1 : 0,
+            'dieta'           => $request->alimentacion, 
+            'imagen'          => $rutaImagen,
+            'rasgos'          => $request->atributos ?? [],
         ]);
 
         return back()->with('success', 'Animal guardado correctamente');

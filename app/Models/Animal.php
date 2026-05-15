@@ -12,14 +12,14 @@ class Animal extends Model
         'nombre',
         'grupo',
         'especie',
-        'nacimiento',
+        'anno_nacimiento',
         'sexo',
         'tamaño',
         'peso',
         'castrado',
-        'alimentacion',
+        'dieta',
         'imagen',
-        'atributos'
+        'rasgos'
     ];
 
     protected $casts = [

@@ -13,7 +13,6 @@ class DashboardController extends Controller
     {
         $adminName = Auth::check() ? Auth::user()->nombre : 'Administrador';
 
-
         $animalesTotales = Animal::count();
 
         $especieMasPresente = Animal::select('especie', DB::raw('count(*) as total'))
