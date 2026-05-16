@@ -26,7 +26,7 @@ class UserController extends Controller {
     }
 
     public function verificarLogin(Request $request) {
-        // 1. Validamos solo que los campos estén presentes
+        // Validamos
         $credentials = $request->validate([
             'usuario'  => 'required',
             'password' => 'required',
@@ -35,21 +35,15 @@ class UserController extends Controller {
             'password.required' => 'La contraseña es obligatoria.',
         ]);
 
-        // 2. Intentamos el login
-        // Auth::attempt busca al usuario por 'usuario' y comprueba la password (encriptada)
+        // Comprobamos los datos
         if (Auth::attempt(['usuario' => $credentials['usuario'], 'password' => $credentials['password']])) {
 
-            // Si el login es correcto, regeneramos la sesión (seguridad extra contra fijación de sesión)
             $request->session()->regenerate();
 
-            // Buscamos el objeto del usuario logueado para pasarlo a la vista
-            $user = Auth::user();
-
-            return view('dashboard', ['user' => $user])->with('success', 'Has iniciado sesión.');
-            //return view('perfil', ['user' => $user])->with('success', 'Has iniciado sesión.');
+            return redirect()->route('index')->with('success', 'Has iniciado sesión.');
         }
 
-        // 3. Si falla, volvemos atrás con un error
+        // Si falla, volvemos atrás con un error
         return back()->withErrors([
             'usuario' => 'Las credenciales no coinciden con nuestros registros.',
         ])->onlyInput('usuario');
@@ -93,6 +87,6 @@ class UserController extends Controller {
             'es_trabaj' => $request->es_trabaj ?? false,
         ]);
 
-        return view('perfil', ['user' => $usuarioNuevo])->with('success', 'Usuario creado correctamente');
+        return redirect()->route('index')->with('success', 'Has iniciado sesión.');
     }
 }
