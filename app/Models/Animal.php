@@ -12,19 +12,19 @@ class Animal extends Model
         'nombre',
         'grupo',
         'especie',
-        'anno_nacimiento',
+        'nacimiento',
         'sexo',
         'tamaño',
         'peso',
         'castrado',
-        'dieta',
+        'alimentacion',
         'imagen',
-        'rasgos'
+        'atributos'
     ];
 
     protected $casts = [
         'castrado' => 'boolean',
-        'rasgos' => 'array'
+        'atributos' => 'array'
     ];
 
     public function donantes()

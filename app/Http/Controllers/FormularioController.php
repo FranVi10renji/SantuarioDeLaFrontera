@@ -50,23 +50,19 @@ class FormularioController extends Controller
             'atributos' => 'nullable|array' 
         ]);
 
-        // $rutaImagen = null;
-        // if ($request->hasFile('imagen')) 
-        // {
-        //     $imagen = $request->file('imagen');
-
-        //     // Nombre único
-        //     $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
-
-        //     // Mover archivo
-        //     $imagen->move(public_path('img/animals'), $nombreImagen);
-
-        //     // Guardar ruta en BD si quieres
-        //     $rutaImagen = 'img/animals/' . $nombreImagen;
-        // }
         $rutaImagen = null;
-        if ($request->hasFile('imagen')) {
-            $rutaImagen = $request->file('imagen')->store('img/animals', 'public');
+        if ($request->hasFile('imagen')) 
+        {
+            $imagen = $request->file('imagen');
+
+            // Nombre único pero identificable
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+
+            // Mover archivo
+            $imagen->move(public_path('img/animals'), $nombreImagen);
+
+            // Guardar ruta en BD si quieres
+            $rutaImagen = 'img/animals/' . $nombreImagen;
         }
 
         // $sexoAbreviado = ($request->sexo == 'hembra') ? 'h' : 'm';
@@ -75,14 +71,14 @@ class FormularioController extends Controller
             'nombre'          => $request->nombre,
             'grupo'           => $request->grupo,
             'especie'         => $request->especie,
-            'anno_nacimiento' => $request->nacimiento, 
+            'nacimiento'      => $request->nacimiento, 
             'sexo'            => $request->sexo,
             'tamaño'          => $request->tamaño,
             'peso'            => $request->peso,
             'castrado'        => $request->castrado == 'si' ? 1 : 0,
-            'dieta'           => $request->alimentacion, 
+            'alimentacion'    => $request->alimentacion, 
             'imagen'          => $rutaImagen,
-            'rasgos'          => $request->atributos ?? [],
+            'atributos'       => $request->atributos ?? [],
         ]);
 
         return back()->with('success', 'Animal guardado correctamente');

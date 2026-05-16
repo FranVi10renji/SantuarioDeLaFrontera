@@ -242,7 +242,7 @@ Body {
     gap: 10px;
 }
 
-.Barra-Busqueda input, .Barra-Busqueda select {
+.Barra-Busqueda input {
     border: none;
     background: transparent;
     font-family: inherit;
@@ -252,9 +252,31 @@ Body {
 }
 
 .Barra-Busqueda select {
-    border-left: 1px solid var(--neutro);
-    padding-left: 15px;
+    border: none; 
+    background: transparent; 
+    font-weight: bold; 
+    outline: none; 
     cursor: pointer;
+    color: var(--azul-texto);
+}
+
+.Barra-Busqueda label{
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.Barra-Busqueda i{
+    color: var(--azul-texto);
+}
+
+.Barra-Busqueda button{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
 .btn-reset {

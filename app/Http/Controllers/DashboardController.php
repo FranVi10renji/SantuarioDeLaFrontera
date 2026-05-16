@@ -79,9 +79,9 @@ class DashboardController extends Controller
             ->toArray();
 
         //Gráfica atributos
-        $graficaRasgos = Animal::whereNotNull('rasgos')
+        $graficaRasgos = Animal::whereNotNull('atributos')
             ->get()
-            ->pluck('rasgos')
+            ->pluck('atributos')
             ->collapse()
             ->countBy()
             ->sortDesc()
@@ -112,13 +112,13 @@ class DashboardController extends Controller
         $animal->nombre = 'Melocotón ' . rand(1, 100); 
         $animal->grupo = 'Mamífero';
         $animal->especie = 'Perro';
-        $animal->rasgos = ['sociable', 'territorial'];
+        $animal->atributos = ['sociable', 'territorial'];
         $animal->sexo = 'M';
-        $animal->anno_nacimiento = 2004;
+        $animal->nacimiento = 2004;
         $animal->tamaño = 1.54;
         $animal->peso = 12.98;
         $animal->castrado = false;
-        $animal->dieta = 'Carnívoro';
+        $animal->alimentacion = 'Carnívoro';
         
         $animal->save();
 
@@ -162,16 +162,25 @@ class DashboardController extends Controller
     public function actualizarAnimal(Request $request)
     {
         $animal = Animal::findOrFail($request->animal_id);
+
         $campo = $request->campo;
         $valor = $request->valor;
 
-        // Si el campo que llega es 'imagen', tratamos el $valor como un archivo
+        // Si el campo es imagen
         if ($campo === 'imagen' && $request->hasFile('valor')) {
-            $animal->imagen = $request->file('valor')->store('img/animals', 'public');
-        } else {
-            // Para cualquier otro campo (nombre, especie, etc.)
+
+            $archivo = $request->file('valor');
+
+            // Sobreescribe porque es del mismo animal
+            $nombreArchivo = $archivo->getClientOriginalName();
+
+            // Mover a public/img/animals
+            $archivo->move(public_path('img/animals'), $nombreArchivo);
+
+            // Guardar ruta en BD
+            $animal->imagen = 'img/animals/' . $nombreArchivo;
+        } else
             $animal->$campo = $valor;
-        }
 
         $animal->save();
 

@@ -126,21 +126,21 @@
 
                 <div class="Barra-Busqueda">
                     
-                    <label style="margin-right: 10px; font-weight: bold;">Ordenar por:</label>
+                    <label for="orden_animal" style="margin-right: 10px; font-weight: bold;">Ordenar por:</label>
                     
                     {{-- Select con los nombres reales de tu base de datos --}}
-                    <select name="orden_animal" style="border: none; background: transparent; font-weight: bold; outline: none; cursor: pointer;">
+                    <select name="orden_animal">
                         <option value="nombre" {{ request('orden_animal') == 'nombre' ? 'selected' : '' }}>Nombre</option>
                         <option value="especie" {{ request('orden_animal') == 'especie' ? 'selected' : '' }}>Especie</option>
                         <option value="grupo" {{ request('orden_animal') == 'grupo' ? 'selected' : '' }}>Grupo</option>
-                        <option value="anno_nacimiento" {{ request('orden_animal') == 'anno_nacimiento' ? 'selected' : '' }}>Nacimiento</option>
+                        <option value="nacimiento" {{ request('orden_animal') == 'nacimiento' ? 'selected' : '' }}>Nacimiento</option>
                         <option value="sexo" {{ request('orden_animal') == 'sexo' ? 'selected' : '' }}>Sexo</option>
                         <option value="tamano" {{ request('orden_animal') == 'tamano' ? 'selected' : '' }}>Tamaño</option>
-                        <option value="dieta" {{ request('orden_animal') == 'dieta' ? 'selected' : '' }}>Alimentación</option>
+                        <option value="alimentacion" {{ request('orden_animal') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
                     </select>
 
-                    <button type="submit" style="border: none; background: transparent; cursor: pointer; margin-left: 15px; display: flex; align-items: center; gap: 5px;">
-                        <i class="fas fa-search" style="color: #333;"></i>
+                    <button type="submit">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
             </form>
@@ -153,7 +153,7 @@
                             @if (empty($animal->imagen))
                                 <img src="{{ asset('img/animals/default-animal.png') }}" alt="Imagen por defecto">
                             @else
-                                <img src="{{ asset('storage/' . $animal->imagen) }}" alt="{{ 'Foto de ' . $animal->nombre }}">
+                                <img src="{{ asset($animal->imagen) }}" alt="{{ 'Foto de ' . $animal->nombre }}">
                             @endif
 
                             @php $esHembra = strtolower($animal->sexo) == 'h'; @endphp                            
@@ -168,7 +168,7 @@
                             <div class="Atributos-Lista">
                                 <p><strong>Especie:</strong> {{ $animal->especie }}</p>
                                 <p><strong>Grupo:</strong> {{ $animal->grupo }}</p>
-                                <p><strong>Año de nacimiento:</strong> {{ $animal->anno_nacimiento }}</p>
+                                <p><strong>Año de nacimiento:</strong> {{ $animal->nacimiento }}</p>
                                 <p><strong>Peso:</strong> {{ $animal->peso }} kg</p>
                                 <p><strong>Tamaño:</strong> {{ $animal->tamaño }}</p>
                             </div>

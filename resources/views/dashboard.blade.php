@@ -165,11 +165,11 @@
                                 <td>{{ $animal->grupo }}</td>
                                 <td>{{ $animal->especie }}</td>
                                 <td>{{ $animal->sexo }}</td>
-                                <td>{{ $animal->anno_nacimiento }}</td>
+                                <td>{{ $animal->nacimiento }}</td>
                                 <td>{{ $animal->tamaño }}</td>
                                 <td>{{ $animal->peso }}</td>
                                 <td>{{ $animal->castrado ? 'Sí' : 'No' }}</td>
-                                <td>{{ $animal->dieta }}</td>
+                                <td>{{ $animal->alimentacion }}</td>
 
                                 <td class="td-icono">
                                     <form action="{{ route('dashboard.animal.eliminar', $animal->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar a {{ $animal->nombre }}?');">
