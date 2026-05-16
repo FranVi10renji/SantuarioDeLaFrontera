@@ -132,8 +132,8 @@
 
             <div class="input-group">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" name="apellido" placeholder="Apellidos" required>
-                @error('apellido')
+                <input type="text" name="apellidos" placeholder="Apellidos" required>
+                @error('apellidos')
                     <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>

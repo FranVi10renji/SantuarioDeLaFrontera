@@ -54,7 +54,7 @@ class UserController extends Controller {
         //Reglas de validación de registro
         $rules = [
             'nombre' => 'required|min:3',
-            'apellido' => 'required',
+            'apellidos' => 'required',
             'email' => 'required|email|unique:users,email',
             'usuario' => 'required|unique:users,usuario',
             'password' => 'required|min:8|confirmed',
@@ -64,7 +64,7 @@ class UserController extends Controller {
         $messages = [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.min' => 'El nombre debe tener al menos 3 caracteres.',
-            'apellido.required' => 'Los apellidos son obligatorios.',
+            'apellidos.required' => 'Los apellidos son obligatorios.',
             'email.required' => 'El correo electrónico es necesario.',
             'email.unique' => 'Este correo ya está registrado.',
             'usuario.unique' => 'El nombre de usuario ya está en uso.',
@@ -79,7 +79,7 @@ class UserController extends Controller {
         //Creación del usuario
         $usuarioNuevo = User::create([
             'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
+            'apellidos' => $request->apellidos,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'usuario' => $request->usuario,
