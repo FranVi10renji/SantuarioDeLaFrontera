@@ -42,9 +42,11 @@
                 <li>
                     <a href="{{route('formulario')}}">FORMULARIO</a>
                 </li>
-                <li>
-                    <a href="{{route('dashboard')}}">DASHBOARD</a> <!--Esconder esto si no es admin-->
-                </li>
+                <@if(auth()->check() && auth()->user()->id == 0) <!--Escondido si no es admin-->
+                    <li>
+                        <a href="{{route('dashboard')}}">DASHBOARD</a>
+                    </li>
+                @endif
                 <li>
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </li>
