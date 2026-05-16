@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Animal extends Model
 {
+    // protected $table = 'SanturarioDeLaFrontera'; 
+    public $timestamps = false;
     protected $fillable = [
         'nombre',
         'grupo',
@@ -21,8 +23,8 @@ class Animal extends Model
     ];
 
     protected $casts = [
-        'rasgos' => 'array',
         'castrado' => 'boolean',
+        'atributos' => 'array'
     ];
 
     public function donantes()

@@ -9,11 +9,11 @@ use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CookieController;
 
-/*
-Route::get('/', function () { 
-    return view('welcome'); 
-});
-*/
+
+// Route::get('/', function () { 
+//     return view('index'); 
+// });
+
 
 // El primer parámetro es la ruta a la que se accede (/) y luego la clase (IndexController) y el metodo (mostrar) de la clase al que accedemos
 Route::get('/', [IndexController::class, 'index'])->name('index');
@@ -28,6 +28,20 @@ Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])-
 // Cookies
 Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
 Route::post('/rechazar-cookies', [CookieController::class, 'rechazar']);
+
+//Dashboard
+//crear ejemplos
+Route::post('/dashboard/animal-ejemplo', [App\Http\Controllers\DashboardController::class, 'crearAnimalEjemplo'])->name('dashboard.animal.ejemplo');
+Route::post('/dashboard/trabajador-ejemplo', [App\Http\Controllers\DashboardController::class, 'crearTrabajadorEjemplo'])->name('dashboard.trabajador.ejemplo');
+//eliminar individuales
+Route::delete('/dashboard/animal/{id}', [App\Http\Controllers\DashboardController::class, 'eliminarAnimal'])->name('dashboard.animal.eliminar');
+Route::delete('/dashboard/trabajador/{id}', [App\Http\Controllers\DashboardController::class, 'eliminarTrabajador'])->name('dashboard.trabajador.eliminar');
+//eliminar TODO
+Route::delete('/dashboard/animales/eliminar-todo', [App\Http\Controllers\DashboardController::class, 'eliminarTodosAnimales'])->name('dashboard.animales.eliminar_todo');
+Route::delete('/dashboard/trabajadores/eliminar-todo', [App\Http\Controllers\DashboardController::class, 'eliminarTodosTrabajadores'])->name('dashboard.trabajadores.eliminar_todo');
+//actualizar
+Route::put('/dashboard/animal/actualizar', [App\Http\Controllers\DashboardController::class, 'actualizarAnimal'])->name('dashboard.animal.actualizar');
+Route::put('/dashboard/trabajador/actualizar', [App\Http\Controllers\DashboardController::class, 'actualizarTrabajador'])->name('dashboard.trabajador.actualizar');
 
 //Login y registros
 Route::get('/register', [UserController::class, 'formularioRegistro'])->name('formularioRegistro');
