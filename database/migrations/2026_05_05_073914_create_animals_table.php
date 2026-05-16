@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre, 100');
-            $table->string('especie, 100');
-            $table->json('rasgos');
-            $table->integer('anno_nacimiento')->unsigned();
-            $table->string('sexo, 1');
+            $table->string('nombre', 100);
+            $table->string('especie', 100);
+            $table->json('atributos')->nullable();
+            $table->integer('nacimiento')->unsigned();
+            $table->string('sexo', 1);
             $table->float('peso')->unsigned();
             $table->float('tamaño')->unsigned();
-            $table->string('dieta');
+            $table->string('alimentacion');
             $table->string('grupo');
             $table->boolean('castrado')->default(false);
             $table->string('imagen')->nullable();
+            $table->timestamps();
         });
     }
 

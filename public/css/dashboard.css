@@ -1,0 +1,310 @@
+/* =========================================
+   1. CONFIGURACIÓN INICIAL Y VARIABLES
+   ========================================= */
+
+:root {
+    --azul-bg: #0A2E36;
+    --azul-txt: #0A2E36;
+    --verde: #82D382;
+    --rosa: #C687E3;
+    --neutro: #D9D9D9;
+    --neutro-bg: #d9d9d9;
+    --neutro_oscuro: #222;
+    --rojo: #A80000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--neutro-bg);
+    color: var(--neutro_oscuro);
+}
+
+body.dark-mode {
+    --azul-bg: #071e23;
+    --azul-txt: #d9d9d9;
+    --verde: #315631;
+    --neutro: #d9d9d9;
+    --neutro-bg: #222;
+    --neutro_oscuro: #d9d9d9;
+    --rojo: #A80000;
+}
+
+/* =========================================
+   2. HEADER Y NAVEGACIÓN
+   ========================================= */
+
+header {
+    background-color: var(--azul-bg);
+    color: var(--neutro);
+    padding: 1em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3em;
+}
+
+nav img {
+    height: 2em;
+    cursor: pointer;
+}
+
+nav span {
+    display: none;
+}
+
+nav a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.fa-circle-half-stroke {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* =========================================
+   ESTILOS ESPECÍFICOS DEL DASHBOARD
+   (Tabla de Información General)
+   ========================================= */
+
+.admin-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.admin-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.admin-container h1 span {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+hr.divisor {
+    border: none;
+    border-top: 2px solid var(--neutro);
+    margin: 40px 0;
+}
+
+.info-general {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.info-general h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.tabla-estadisticas {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 2px solid var(--neutro_oscuro);
+    font-size: 16px;
+}
+
+.tabla-estadisticas td {
+    border: 1px solid var(--neutro_oscuro);
+    padding: 12px 30px;
+}
+
+.tabla-estadisticas td:first-child {
+    text-align: left;
+    font-weight: bold;
+}
+
+.tabla-estadisticas td.valor {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* =========================================
+   4. SECCIONES DE DATOS
+   ========================================= */
+
+.info-detallada {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.info-detallada h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.botones-accion {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.botones-accion button,
+.botones-accion a,
+.barra-edicion button {
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-dark {
+    background-color: var(--azul-bg);
+}
+
+.btn-danger {
+    background-color: var(--rojo);
+}
+
+.barra-opciones {
+    background-color: var(--neutro-bg);
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.barra-opciones select,
+.barra-opciones input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--neutro_oscuro);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 5px;
+    outline: none;
+    font-weight: bold;
+    color: var(--neutro_oscuro);
+}
+
+.barra-opciones i {
+    color: var(--neutro_oscuro);
+}
+
+.barra-opciones input {
+    border: 2px solid var(--azul-bg);
+    border-radius: 15px;
+    padding: 5px 15px;
+    background-color: var(--neutro-bg);
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.tabla-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+    background-color: var(--neutro-bg);
+}
+
+.tabla-datos th {
+    background-color: var(--neutro-bg);
+    padding: 12px;
+    border: 1px solid var(--neutro_oscuro);
+    font-weight: bold;
+}
+
+.tabla-datos td {
+    padding: 10px;
+    border: 1px solid var(--neutro_oscuro);
+}
+
+.td-icono {
+    font-size: 18px;
+}
+
+.icono-eliminar {
+    color: var(--rojo);
+}
+
+.icono-editar {
+    color: var(--azul-txt);
+}
+
+.barra-edicion {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: var(--azul-bg);
+    color: var(--neutro);
+    text-align: center;
+    padding: 20px;
+    margin-top: 2em;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer a {
+    color: var(--neutro);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 1em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer i {
+    font-size: 2em;
+}
+
+.bye {
+    margin-top: 1em;
+}

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Animal extends Model
 {
+    // protected $table = 'SanturarioDeLaFrontera'; 
+    public $timestamps = false;
     protected $fillable = [
         'nombre',
         'grupo',
@@ -19,4 +21,16 @@ class Animal extends Model
         'imagen',
         'atributos'
     ];
+
+    protected $casts = [
+        'castrado' => 'boolean',
+        'atributos' => 'array'
+    ];
+
+    public function donantes()
+    {
+        return $this->belongsToMany(User::class)
+                    ->withPivot('cantidad')
+                    ->withTimestamps();
+    }
 }

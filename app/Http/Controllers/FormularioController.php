@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Animal;
-use App\Models\Voluntario;
+use App\Models\User;
 
 class FormularioController extends Controller
 {
@@ -25,16 +25,11 @@ class FormularioController extends Controller
             'mensaje' => 'nullable|string|max:200',
         ]);
 
-        // Guardar en BD
-        Voluntario::create([
-            'nombre' => $request->nombre,
-            'apellidos' => $request->apellidos,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'mensaje' => $request->mensaje,
-            // Creo que hay que ponerle un numerito como que ahora el user se promociona a voluntario
-            // 'es_trab' => 1, // No sé exactamente si era (0 user; 1 trabajador; 2 admin) ???
-        ]);
+        // Promocionar usuario a trabajador actualizando atributo en BD
+        $trabajador = User::findOrFail($request->trabajador_id);
+
+        $trabajador->es_trabaj = true;
+        $trabajador->save();
 
         return back()->with('success', 'Datos enviados correctamente');
     }
@@ -46,35 +41,44 @@ class FormularioController extends Controller
             'grupo' => 'required|string',
             'especie' => 'required|string',
             'nacimiento' => 'required|integer|min:1970|max:2026',
-            'sexo' => 'required|in:macho,hembra',
-            'tamaño' => 'required|numeric',
-            'peso' => 'required|numeric',
-            'castrado' => 'required|in:si,no',
+            'sexo' => 'required|in:M,H',
+            'tamaño' => 'required|numeric|min:0.01|max:10',
+            'peso' => 'required|numeric|min:0.01|max:50',
+            'castrado' => 'required|in:0,1',
             'alimentacion' => 'required|string',
             'imagen' => 'nullable|image',
+            'atributos' => 'nullable|array' 
         ]);
 
-        // Procesamiento de img
         $rutaImagen = null;
-        if ($request->hasFile('imagen'))
-            $rutaImagen = $request->file('imagen')->store('img/animals', 'public');
+        if ($request->hasFile('imagen')) 
+        {
+            $imagen = $request->file('imagen');
 
-        // Checkboxes
-        $atributos = $request->atributos ? implode(',', $request->atributos) : null;
+            // Nombre único pero identificable
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
 
-        // Subir a la BD
+            // Mover archivo
+            $imagen->move(public_path('img/animals'), $nombreImagen);
+
+            // Guardar ruta en BD si quieres
+            $rutaImagen = 'img/animals/' . $nombreImagen;
+        }
+
+        // $sexoAbreviado = ($request->sexo == 'hembra') ? 'h' : 'm';
+
         Animal::create([
-            'nombre' => $request->nombre,
-            'grupo' => $request->grupo,
-            'especie' => $request->especie,
-            'nacimiento' => $request->nacimiento,
-            'sexo' => $request->sexo,
-            'tamaño' => $request->tamaño,
-            'peso' => $request->peso,
-            'castrado' => $request->castrado,
-            'alimentacion' => $request->alimentacion,
-            'imagen' => $rutaImagen,
-            'atributos' => $atributos,
+            'nombre'          => $request->nombre,
+            'grupo'           => $request->grupo,
+            'especie'         => $request->especie,
+            'nacimiento'      => $request->nacimiento, 
+            'sexo'            => $request->sexo,
+            'tamaño'          => $request->tamaño,
+            'peso'            => $request->peso,
+            'castrado'        => $request->castrado == 'si' ? 1 : 0,
+            'alimentacion'    => $request->alimentacion, 
+            'imagen'          => $rutaImagen,
+            'atributos'       => $request->atributos ?? [],
         ]);
 
         return back()->with('success', 'Animal guardado correctamente');

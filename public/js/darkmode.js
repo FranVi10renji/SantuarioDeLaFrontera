@@ -2,16 +2,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btn = document.querySelector('.fa-circle-half-stroke');
 
-    if (localStorage.getItem('theme') === 'dark')
+    const cookiebanner = document.querySelector('.cookie-banner');
+
+    // Cargar tema guardado
+    if (localStorage.getItem('theme') === 'dark') 
+    {
         document.body.classList.add('dark-mode');
 
-    btn.addEventListener('click', () => {
+        if (cookiebanner)
+            cookiebanner.classList.add('dark-mode');
+    }
 
-        document.body.classList.toggle('dark-mode');
+    // Cambiar tema
+    if (btn) 
+    {
+        btn.addEventListener('click', () => {
 
-        localStorage.setItem(
-            'theme',
-            document.body.classList.contains('dark-mode') ? 'dark' : 'light'
-        );
-    });
+            document.body.classList.toggle('dark-mode');
+
+            if (cookiebanner)
+                cookiebanner.classList.toggle('dark-mode');
+
+            localStorage.setItem('theme',document.body.classList.contains('dark-mode') ? 'dark': 'light');
+        });
+    }
 });
