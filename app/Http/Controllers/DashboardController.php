@@ -166,21 +166,11 @@ class DashboardController extends Controller
         $campo = $request->campo;
         $valor = $request->valor;
 
-        // Si el campo es imagen
-        if ($campo === 'imagen' && $request->hasFile('valor')) {
-
-            $archivo = $request->file('valor');
-
-            // Sobreescribe porque es del mismo animal
-            $nombreArchivo = $archivo->getClientOriginalName();
-
-            // Mover a public/img/animals
-            $archivo->move(public_path('img/animals'), $nombreArchivo);
-
-            // Guardar ruta en BD
-            $animal->imagen = 'img/animals/' . $nombreArchivo;
-        } else
-            $animal->$campo = $valor;
+        // Si el campo que llega es 'imagen', tratamos el $valor como un archivo
+        if ($campo === 'imagen' && $request->hasFile('valor'))
+            $animal->imagen = $request->file('valor')->store('img/animals', 'public');
+        else
+            $animal->$campo = $valor; // Para cualquier otro campo (nombre, especie, etc.)
 
         $animal->save();
 

@@ -188,7 +188,7 @@
                             @if (empty($animal->imagen))
                                 <img src="{{ asset('img/animals/default-animal.png') }}" alt="Imagen por defecto">
                             @else
-                                <img src="{{ asset($animal->imagen) }}" alt="{{ 'Foto de ' . $animal->nombre }}">
+                                <img src="{{ asset('storage/' . $animal->imagen) }}" alt="{{ 'Foto de ' . $animal->nombre }}">
                             @endif
 
                             @php $esHembra = strtolower($animal->sexo) == 'h'; @endphp                            
