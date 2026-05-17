@@ -40,13 +40,33 @@
                     <a href="{{route('index')}}">INICIO</a>
                 </li>
                 <li>
-                    <a href="{{route('formulario')}}">FORMULARIO</a>
+                    @if(auth()->check())
+                        <a href="{{route('formulario')}}">FORMULARIO</a>
+                    @else
+                        <a href="{{route('formularioLogin')}}">FORMULARIO</a>
+                    @endif
                 </li>
-                @if(auth()->check() && auth()->user()->id == 0) <!--Escondido si no es admin-->
+                @auth <!--Si está autenticado-->
+                    @if(auth()->user()->id == 0) <!--Se muestra si es admin-->
+                        <li> 
+                            <a href="{{ route('dashboard') }}">DASHBOARD</a>
+                        </li>
+                    @endif
                     <li>
-                        <a href="{{route('dashboard')}}">DASHBOARD</a>
+                        <a href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            CERRAR SESIÓN
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
-                @endif
+                @else <!--Si NO está autenticado-->
+                    <li>
+                        <a href="{{ route('formularioLogin') }}">INICIAR SESIÓN</a>
+                    </li>
+                @endauth
                 <li>
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </li>
@@ -75,14 +95,20 @@
                 </div>
                 <div class="Mision_der">
                     <p>Nuestra misión es transformar la realidad de los animales desprotegidos mediante la intervención directa y la concienciación social. Nos enfocamos en el rescate ético, la búsqueda de hogares responsables a través de la adopción y la gestión transparente de recursos y donaciones. Queremos ser un referente de bienestar animal en Andalucía, fomentando una comunidad donde el voluntariado y la educación sean los pilares para erradicar el abandono y el maltrato.</p>
-                    @if(auth()->check() && auth()->user()->id != 0 && auth()->user()->es_trabaj == 0)
+                    @if(!auth()->check() || (auth()->user()?->id != 0 && auth()->user()?->es_trabaj == 0))
                         <div class="Ayuda"> <!--Esto sólo le puede salir a un usuario normal-->
                             <div class="Ayuda_izq">
                                 ¿Nos quieres ayudar?
                             </div>
-                            <div class="Ayuda_der">
-                                <a href="{{route('formulario')}}"><button class="btn-formulario">Apúntate como voluntario</button></a>
-                            </div>
+                            @if(auth()->check())
+                                <div class="Ayuda_der">
+                                    <a href="{{route('formulario')}}"><button class="btn-formulario">Apúntate como voluntario</button></a>
+                                </div>
+                            @else
+                                <div class="Ayuda_der">
+                                    <a href="{{route('formularioLogin')}}"><button class="btn-formulario">Apúntate como voluntario</button></a>
+                                </div>
+                            @endif
                         </div>
                     @endif
                 </div>
@@ -103,12 +129,14 @@
                     <p>donaciones para mejorar su vida</p>
                 </div>
             </div>
-            @if(auth()->check() && auth()->user()->id == 0) <!--Esto sólo le puede salir al admin-->
-                <div class="Boton-container"> <a href="{{ route('dashboard') }}">
-                        <button class="btn-stats">Consulta todas las estadísticas</button>
-                    </a>
-                </div>
-            @endif
+            @auth <!--Si está autenticado-->
+                @if(auth()->check() && auth()->user()->id == 0) <!--Se muestra si es admin-->
+                    <div class="Boton-container"> <a href="{{ route('dashboard') }}">
+                            <button class="btn-stats">Consulta todas las estadísticas</button>
+                        </a>
+                    </div>
+                @endif
+            @endauth
         </section>
 
         <section class="Animales">

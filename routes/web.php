@@ -48,3 +48,4 @@ Route::get('/register', [UserController::class, 'formularioRegistro'])->name('fo
 Route::get('/login', [UserController::class, 'formularioLogin'])->name('formularioLogin');
 Route::post('/register', [UserController::class, 'verificarRegistro'])->name('verificarRegistro');
 Route::post('/login', [UserController::class, 'verificarLogin'])->name('verificarLogin');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');

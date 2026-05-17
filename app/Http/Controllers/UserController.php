@@ -10,12 +10,12 @@ use App\Models\User; // Importamos el Modelo
 
 class UserController extends Controller {
     public function mostrar(): View {
-    // El Controlador le pide datos al Modelo buscando el ID 1
-    $usuario = User::find(1);
+        // El Controlador le pide datos al Modelo buscando el ID 1
+        $usuario = User::find(1);
 
-    // Carga la vista 'perfil' pasando la variable 'usuario' bajo el nombre 'user'
-    return view('perfil', ['user' => $usuario]);
-}
+        // Carga la vista 'perfil' pasando la variable 'usuario' bajo el nombre 'user'
+        return view('perfil', ['user' => $usuario]);
+    }
 
     public function formularioRegistro(): View {
         return view('register');
@@ -88,5 +88,19 @@ class UserController extends Controller {
         ]);
 
         return redirect()->route('index')->with('success', 'Has iniciado sesión.');
+    }
+
+    public function logout(Request $request){
+        // Cierra la sesión del usuario
+        Auth::logout();
+
+        // Invalida la sesión actual del navegador
+        $request->session()->invalidate();
+
+        // Regenera el token CSRF para evitar ataques
+        $request->session()->regenerateToken();
+
+        // Redirige a la página principal
+        return redirect()->route('index');
     }
 }
