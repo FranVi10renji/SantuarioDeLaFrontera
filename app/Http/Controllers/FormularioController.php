@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Animal;
@@ -16,22 +17,20 @@ class FormularioController extends Controller
 
     public function storevoluntario(Request $request)
     {
-        // Validación
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'email' => 'required|email',
-            'telefono' => 'nullable|string|max:9',
-            'mensaje' => 'nullable|string|max:200',
-        ]);
+        // Validación del formulario (?)
 
-        // Promocionar usuario a trabajador actualizando atributo en BD
-        $trabajador = User::findOrFail($request->trabajador_id);
+        if (Auth::check()) 
+        {
+            $user = Auth::user();
 
-        $trabajador->es_trabaj = true;
-        $trabajador->save();
+            if ($user instanceof User) 
+            {
+                $user->es_trabaj = true; // Convertimos al usuario en trabajador
+                $user->save();           // Lo guardamos en la base de datos
+            }
+        }
 
-        return back()->with('success', 'Datos enviados correctamente');
+        return redirect()->back()->with('success', 'Usuario convertido a trabajador.');
     }
 
     public function storeanimal(Request $request)
