@@ -17,12 +17,17 @@ class FormularioController extends Controller
 
     public function storevoluntario(Request $request)
     {
-        //Validación del formulario (?)
+        // Validación del formulario (?)
 
-        if (Auth::check()) {
+        if (Auth::check()) 
+        {
             $user = Auth::user();
-            $user->es_trabaj = 1; // Convertimos al usuario en trabajador
-            $user->save();        // Lo guardamos en la base de datos
+
+            if ($user instanceof User) 
+            {
+                $user->es_trabaj = true; // Convertimos al usuario en trabajador
+                $user->save();           // Lo guardamos en la base de datos
+            }
         }
 
         return redirect()->back()->with('success', 'Usuario convertido a trabajador.');
