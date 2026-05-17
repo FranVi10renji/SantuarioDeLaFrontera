@@ -24,6 +24,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Formularios
 Route::post('/formulario/voluntarios', [FormularioController::class, 'storevoluntario'])->name('subirvoluntario');
 Route::post('/formulario/animal', [FormularioController::class, 'storeanimal'])->name('subiranimal');
+Route::delete('/animal/adoptar/{id}', [IndexController::class, 'adoptar'])->name('animal.adoptar');
+Route::post('/animal/apadrinar/{id}', [IndexController::class, 'apadrinar'])->name('animal.apadrinar');
 
 // Cookies
 Route::post('/aceptar-cookies', [CookieController::class, 'aceptar']);
