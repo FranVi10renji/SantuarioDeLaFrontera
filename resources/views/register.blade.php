@@ -1,117 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Santuario de la Frontera</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Registro de Santuario de la frontera.">
+    <meta name="keywords" content="login, acceder, registro, usuario, contraseña, santuario">
+    <meta name="author" content="Javier Alcoba Navero, Claudia García-Matarredona Urbano, Jesús Fernández Carreño, Marcos García Bravo">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="spanish">
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Quicksand', sans-serif;
-            /* Usamos el mismo fondo que el login para coherencia */
-            background: url('https://wallpapers.com/images/hd/minimalist-forest-1920-x-1080-wallpaper-5pkjsxawbtqao1nz.jpg') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .register-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            padding: 30px;
-            width: 420px;
-            text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            margin: 20px;
-        }
-
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: #000;
-            font-size: 22px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px 40px;
-            border-radius: 25px;
-            border: 2px solid #000;
-            background: rgba(255, 255, 255, 0.9);
-            box-sizing: border-box;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .btn-register {
-            background: linear-gradient(to right, #0a2e38, #86d8a3);
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 25px;
-            font-size: 18px;
-            font-family: 'Fredoka One', cursive;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-            transition: transform 0.2s;
-        }
-
-        .btn-register:hover {
-            transform: scale(1.02);
-        }
-
-        .login-link {
-            margin-top: 15px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .login-link a {
-            color: #d152b8;
-            text-decoration: none;
-        }
-
-        .logo-perro {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 250px;
+            font-family: "Madimi One", Arial, Helvetica, sans-serif
         }
     </style>
+    <link rel="stylesheet" href="{{asset('css/register.css')}}">
+    <title>Registro</title>
 </head>
 <body>
 
@@ -126,7 +37,7 @@
                 <i class="fa-solid fa-user"></i>
                 <input type="text" name="nombre" placeholder="Nombre" required>
                 @error('nombre')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -134,7 +45,7 @@
                 <i class="fa-solid fa-user"></i>
                 <input type="text" name="apellidos" placeholder="Apellidos" required>
                 @error('apellidos')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -142,7 +53,7 @@
                 <i class="fa-solid fa-at"></i>
                 <input type="email" name="email" placeholder="Correo electrónico" required>
                 @error('email')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -150,7 +61,7 @@
                 <i class="fa-solid fa-user-tag"></i>
                 <input type="text" name="usuario" placeholder="Nombre de usuario" required>
                 @error('usuario')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -158,7 +69,7 @@
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="password" placeholder="Contraseña" required>
                 @error('password')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -166,7 +77,7 @@
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="password_confirmation" placeholder="Confirmar contraseña" required>
                 @error('password_confirmation')
-                    <div style="color: red;">{{ $message }}</div>
+                <div style="color: red;">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -181,4 +92,5 @@
     </div>
 
 </body>
+
 </html>
