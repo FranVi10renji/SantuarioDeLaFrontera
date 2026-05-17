@@ -40,11 +40,33 @@
                     <a href="{{route('index')}}">INICIO</a>
                 </li>
                 <li>
-                    <a href="{{route('formulario')}}">FORMULARIO</a>
+                    @if(auth()->check())
+                        <a href="{{route('formulario')}}">FORMULARIO</a>
+                    @else
+                        <a href="{{route('formularioLogin')}}">FORMULARIO</a>
+                    @endif
                 </li>
-                <li>
-                    <a href="{{route('dashboard')}}">DASHBOARD</a> <!--Esconder esto si no es admin-->
-                </li>
+                @auth <!--Si está autenticado-->
+                    @if(auth()->user()->id == 0) <!--Se muestra si es admin-->
+                        <li> 
+                            <a href="{{ route('dashboard') }}">DASHBOARD</a>
+                        </li>
+                    @endif
+                    <li>
+                        <a href="{{ route('logout') }}" 
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            CERRAR SESIÓN
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @else <!--Si NO está autenticado-->
+                    <li>
+                        <a href="{{ route('formularioLogin') }}">INICIAR SESIÓN</a>
+                    </li>
+                @endauth
                 <li>
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </li>

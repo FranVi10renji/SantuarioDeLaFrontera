@@ -42,3 +42,10 @@ Route::delete('/dashboard/trabajadores/eliminar-todo', [App\Http\Controllers\Das
 //actualizar
 Route::put('/dashboard/animal/actualizar', [App\Http\Controllers\DashboardController::class, 'actualizarAnimal'])->name('dashboard.animal.actualizar');
 Route::put('/dashboard/trabajador/actualizar', [App\Http\Controllers\DashboardController::class, 'actualizarTrabajador'])->name('dashboard.trabajador.actualizar');
+
+//Login y registros
+Route::get('/register', [UserController::class, 'formularioRegistro'])->name('formularioRegistro');
+Route::get('/login', [UserController::class, 'formularioLogin'])->name('formularioLogin');
+Route::post('/register', [UserController::class, 'verificarRegistro'])->name('verificarRegistro');
+Route::post('/login', [UserController::class, 'verificarLogin'])->name('verificarLogin');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');

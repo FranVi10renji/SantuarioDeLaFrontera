@@ -1,0 +1,127 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base */
+
+body {
+    background: url('https://wallpapers.com/images/hd/minimalist-forest-1920-x-1080-wallpaper-5pkjsxawbtqao1nz.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El contenedor de cristal */
+.login-card {
+    background: #ffffff26;
+    backdrop-filter: blur(15px);
+    border: 1px solid #ffffff4d;
+    border-radius: 30px;
+    padding: 40px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 #0000004d;
+}
+
+h1 {
+    font-family: 'Fredoka One', cursive;
+    color: #000;
+    font-size: 24px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.welcome-text {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* Inputs */
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 12px 40px;
+    border-radius: 25px;
+    border: 2px solid #000;
+    background: #ffffffcc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Botón Iniciar Sesión */
+
+.btn-login {
+    background: linear-gradient(to right, #0a2e38, #86d8a3);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 25px;
+    font-size: 20px;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Social Login */
+
+.social-login {
+    margin-top: 20px;
+}
+
+.google-icon {
+    width: 35px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.register-link {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.register-link a {
+    color: #d152b8;
+    text-decoration: none;
+}
+
+/* Logo perro arriba a la derecha */
+
+.logo-perro {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+}

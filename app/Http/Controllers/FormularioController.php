@@ -51,19 +51,22 @@ class FormularioController extends Controller
         ]);
 
         $rutaImagen = null;
-        if ($request->hasFile('imagen')) 
-        {
-            $imagen = $request->file('imagen');
+        // if ($request->hasFile('imagen')) 
+        // {
+        //     $imagen = $request->file('imagen');
 
-            // Nombre único pero identificable
-            $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+        //     // Nombre único pero identificable
+        //     $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
 
-            // Mover archivo
-            $imagen->move(public_path('img/animals'), $nombreImagen);
+        //     // Mover archivo
+        //     $imagen->move(public_path('img/animals'), $nombreImagen);
 
-            // Guardar ruta en BD si quieres
-            $rutaImagen = 'img/animals/' . $nombreImagen;
-        }
+        //     // Guardar ruta en BD si quieres
+        //     $rutaImagen = 'img/animals/' . $nombreImagen;
+        // }
+
+        if ($request->hasFile('imagen'))
+            $rutaImagen = $request->file('imagen')->store('img/animals', 'public');
 
         // $sexoAbreviado = ($request->sexo == 'hembra') ? 'h' : 'm';
 
