@@ -87,6 +87,8 @@ class UserController extends Controller {
             'es_trabaj' => $request->es_trabaj ?? false,
         ]);
 
+        Auth::login($usuarioNuevo);
+
         return redirect()->route('index')->with('success', 'Has iniciado sesión.');
     }
 
