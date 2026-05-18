@@ -322,6 +322,15 @@
         });
     </script>
     @endif
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            title: "Necesitas iniciar sesión",
+            text: "Considera registrate para poder ser parte de la familia",
+            icon: "error"
+        });
+    </script>
+    @endif
 </body>
 
 </html>

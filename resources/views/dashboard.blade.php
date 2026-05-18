@@ -309,7 +309,7 @@
                             @foreach($trabajadores as $trabajador)
                             <tr>
                                 <td>{{ $trabajador->nombre }}</td>
-                                <td>{{ $trabajador->apellido }}</td>
+                                <td>{{ $trabajador->apellidos }}</td>
                                 <td>{{ $trabajador->email }}</td>
                                 <td>{{ $trabajador->telefono ?? 'null' }}</td>
                                 <td>{{ $trabajador->es_trabaj ? 'Trabajador' : 'Usuario' }}</td>
