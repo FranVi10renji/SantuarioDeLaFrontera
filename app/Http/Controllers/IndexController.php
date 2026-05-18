@@ -25,6 +25,14 @@ class IndexController extends Controller
 
     public function adoptar(int $id)
     {
+        if (!Auth::check()) 
+        {
+            return back()->with(
+                'error',
+                'Debes iniciar sesión para apadrinar.'
+            );
+        }
+
         $animal = Animal::findOrFail($id);
 
         $animal->delete();
@@ -37,7 +45,8 @@ class IndexController extends Controller
 
     public function apadrinar(int $id)
     {
-        if (!Auth::check()) {
+        if (!Auth::check()) 
+        {
             return back()->with(
                 'error',
                 'Debes iniciar sesión para apadrinar.'

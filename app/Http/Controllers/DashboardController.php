@@ -131,7 +131,7 @@ class DashboardController extends Controller
         
         $trabajador = new \App\Models\User();
         $trabajador->nombre = 'Francisco Javier';
-        $trabajador->apellido = 'Rosa Vega';
+        $trabajador->apellidos = 'Rosa Vega';
         $trabajador->email = "Javirosi{$numero}@gmail.com";
         $trabajador->password = bcrypt('12345678');
         $trabajador->usuario = "javiiirsaV{$numero}";
