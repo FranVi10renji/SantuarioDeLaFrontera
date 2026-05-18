@@ -279,7 +279,7 @@
         <hr>
         <div class="bye">
             <p>Copyright &copy; 2026 Santuario de la Frontera. Todos los derechos reservados.</p>
-            <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos García Bravo</p>
+            <p>Hecho con &#128151; por Javier Alcoba Navero - Claudia García-Matarredona Urbano - Jesús Fernández Carreño - Marcos Vicente Ríos</p>
         </div>
     </footer>
 
